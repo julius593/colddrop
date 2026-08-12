@@ -1,23 +1,24 @@
-<?php
-// ========================================================
-// VER DETALLES DE USUARIO (CASALEERUSUARIOS.PHP)
-// ========================================================
-include_once '../conexion.php';
+<label for="CI">CI</label>
+<input type="number" name="CI" id="CI">
 
-if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
-    @session_start();
-}
+<label for="Nombre">Nombre</label>
+<input type="text" name="Nombre" id="Nombre"> 
 
-$CI = isset($_GET['CI']) ? $_GET['CI'] : (isset($_GET['idCI']) ? $_GET['idCI'] : '');
-$usuarioData = null;
+<label for="Apellido">Apellido</label>
+<input type="text" name="Apellido" id="Apellido">
 
-if (!empty($CI)) {
-    $sql = "SELECT * FROM usuarios WHERE CI = '$CI'";
-    $resultado = $conexion->query($sql);
-    if ($resultado && $resultado->num_rows > 0) {
-        $usuarioData = $resultado->fetch_assoc();
-    }
-}
+<label for="Usuario">Usuario</label>
+<input type="text" name="Usuario" id="Usuario">
+
+<label for="Contrasena">Contraseña</label>
+<input type="password" name="Contrasena" id="Contrasena">
+
+<label for="Direccion">Direccion</label >
+<input type="text" name="Direccion" id="Direccion">
+
+<label for="Celular">Celular</label>
+<input type="number" name="Celular"id="Celular" >
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
