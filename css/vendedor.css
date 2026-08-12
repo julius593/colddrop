@@ -285,3 +285,38 @@ button{
 }
 
 }
+
+
+   .col-perfil, .col-graficos, .col-menu-links {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 30px;
+        border-left: none;
+        text-align: center;
+    }
+
+
+    .foto-admin {
+        margin: 0 auto 20px auto;
+        max-width: 250px;
+    }
+
+
+    .lista-datos-santi {
+        display: inline-block;
+        text-align: left;
+    }
+
+
+    .col-graficos img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    .barra-superior, .barra-inferior {
+        height: auto;
+        padding: 15px;
+    }
+
