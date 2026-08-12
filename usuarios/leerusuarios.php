@@ -12,7 +12,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
     header('Location: ../princip/iniciosesion.php');
     exit();
 }
-
+            
 $sql = "SELECT * FROM usuarios";
 $resultado = $conexion->query($sql);
 ?>
