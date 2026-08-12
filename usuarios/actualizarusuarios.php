@@ -1,29 +1,41 @@
-<?php
-// ========================================================
-// FORMULARIO DE EDICIÓN DE USUARIOS (ACTUALIZARUSUARIOS.PHP)
-// ========================================================
-include_once '../conexion.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<meta>
+<meta>
+<title>bienvenido</title>
+<body>
+    <form action="casaactualizarusuarios.php" method="post">
+<h2>USUARIOS</h2>
+<label for="">CI</label>
+<input type="number" name="CI" value='<?=$CI?>'>
 
-if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
-    @session_start();
-}
+<label for="">Nombre</label>
+<input type="text" name="Nombre" value='<?=$Nombre?>'> 
 
-$CI = isset($_GET['CI']) ? $_GET['CI'] : '';
-$Nombre = $Direccion = $Celular = $Rol = $Estado = '';
+<label for="">Direccion</label>
+<input type="text" name="Direccion" value='<?=$Direccion?>'>
 
-if (!empty($CI)) {
-    $sql = "SELECT * FROM usuarios WHERE CI = '$CI'";
-    $resultado = $conexion->query($sql);
-    if ($resultado && $resultado->num_rows > 0) {
-        $fila = $resultado->fetch_assoc();
-        $CI = $fila['CI'];
-        $Nombre = isset($fila['Nombre']) ? $fila['Nombre'] : '';
-        $Direccion = isset($fila['Direccion']) ? $fila['Direccion'] : '';
-        $Celular = isset($fila['Celular']) ? $fila['Celular'] : '';
-        $Rol = isset($fila['Rol']) ? $fila['Rol'] : 'cliente';
-        $Estado = isset($fila['Estado']) ? $fila['Estado'] : 'Activo';
-    }
-}
+<label for="">Celular</label>
+<input type="number" name="Celular" value='<?=$Celular?>'>
+
+<label for="">Rol</label>
+<input type="text" name="Rol" value='<?=$Rol?>'>
+
+<label for="">Estado</label>
+<input type="number" name="Estado" value='<?=$Estado?>'>
+
+
+<input type="submit" >
+    </form>
+</body>
+</html>
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
