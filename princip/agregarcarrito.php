@@ -1,22 +1,3 @@
-<?php
-// ========================================================
-// AGREGAR UN PRODUCTO AL CARRITO DE COMPRAS
-// ========================================================
-
-// 1. Incluimos la conexión a la base de datos
-include_once '../conexion.php';
-
-// 2. Recibimos los datos por método POST desde el formulario en micarrito.php
-$codigo = $_POST["Codigo"];
-$idpedido = $_POST["id_PEDIDOS"];
-
-// Verificamos que tengamos un número de pedido válido
-if (empty($idpedido) || !is_numeric($idpedido)) {
-    die("Error: No se ha especificado un ID de pedido válido. Por favor, inicia un nuevo pedido.");
-}
-
-$cantidad = $_POST["cantidad"];
-$costo = $_POST["Costo"];
 
 // 3. Calculamos el costo total multiplicando cantidad por precio unitario
 $total = $costo * $cantidad;
