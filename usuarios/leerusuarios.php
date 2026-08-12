@@ -1,18 +1,18 @@
-<?php
-// ========================================================
-// LISTA DE USUARIOS - COLDDROP
-// ========================================================
-include_once '../conexion.php';
-
-if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
-    @session_start();
-}
-
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
-    header('Location: ../princip/iniciosesion.php');
-    exit();
-}
-
+</head>
+<body>
+    <h3>El valor de la variable es: <?php echo $cd; ?></h3>
+    <?php
+        echo "<h2> El valor de esta etiqueta es: ".$cd."</h2>";
+    ?>
+    <table>
+        <tr>
+            <td>Nombre_y_Apellido</td>
+            <td>Direccion</td>
+            <td>Celular</td>
+            <td>Rol</td>
+            <td>Estado</td>
+            <td>CI</td>
+            
 $sql = "SELECT * FROM usuarios";
 $resultado = $conexion->query($sql);
 ?>
