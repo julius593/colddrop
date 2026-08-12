@@ -86,3 +86,4 @@ $rolAdmin = isset($_SESSION['rol']) ? $_SESSION['rol'] : 'Administrador';
 
 </body>
 </html>
+
