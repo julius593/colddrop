@@ -40,6 +40,11 @@ $vendedor = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'General';
             <label for="nombreVendedor">Vendedor:</label>
             <input type="text" name="nombreVendedor" id="nombreVendedor" value="<?php echo htmlspecialchars($vendedor); ?>" readonly>
 
+            <label for="Direccion">Direccion:</label>
+            <input type="text" name="Direccion" id="Direccion" value="">
+
+            <label for="Telefono">Telefono:</label>
+            <input type="text" name="Telefono" id="Telefono" value="">
             <input type="submit" value="Iniciar Nuevo Pedido">
         </form>
 
