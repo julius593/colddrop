@@ -1,22 +1,4 @@
-<?php
-// ========================================================
-// PANEL DE ADMINISTRACIÓN - COLDDROP
-// ========================================================
-if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
-    @session_start();
-}
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
-    header('Location: iniciosesion.php');
-    exit();
-}
-
-// Datos del usuario logueado en la sesión
-$nombreAdmin = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Administrador';
-$ciAdmin = isset($_SESSION['id']) ? $_SESSION['id'] : 'Sin registrar';
-$dirAdmin = isset($_SESSION['dir']) ? $_SESSION['dir'] : 'Sin registrar';
-$rolAdmin = isset($_SESSION['rol']) ? $_SESSION['rol'] : 'Administrador';
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
