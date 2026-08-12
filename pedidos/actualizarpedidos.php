@@ -24,22 +24,21 @@ if($resultado->num_rows>0){
 <body>
     <form action="casaactualizarpedidos.php" method="post">
 <h2>PEDIDOS</h2>
-<label for="">ID de PEDIDOS</label>
-<input type="number" name="idPEDIDOS" value='<?=$idPEDIDOS?>'>
-<label for="">Nombre</label>
-<input type="text" name="Nombre" value='<?=$Nombre?>'> 
 
-<label for="">Fecha</label>
-<input type="text" name="Fecha" value='<?=$Fecha?>'>
+<?php 
+include_once '../conexion.php';
 
-<label for="">Estado</label>
-<input type="number" name="Estado" value='<?=$Estado?>'>
+$idPEDIDOS=$_POST['idPEDIDOS'];
+$Nombre=$_POST['Nombre'];
+$Fecha=$_POST['Fecha'];
+$Estado=$_POST['Estado'];
+$NombreVendedor=$_POST['NombreVendedor'];
+$sql = "INSERT INTO pedidos (idPEDIDOS, Nombre, Fecha, Estado, NombreVendedor) VALUES('$idPEDIDOS','$Nombre','$Fecha', '$Estado','$NombreVendedor' )";
 
-<label for="">NombreVendedor</label>
-<input type="text" name="NombreVendedor" value='<?=$NombreVendedor?>'>
-
-<input type="submit" >
-    </form>
-    
-</body>
-</html>
+if($conn->query($sql) === TRUE){
+    header("location:../princip/micarrito.php?idPEDIDOS=".$idPEDIDOS);
+} else{
+    echo"Error:". $sql. "<br>". $conn->error;
+}
+$conn->close();
+?>
