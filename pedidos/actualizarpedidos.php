@@ -14,6 +14,7 @@ if($resultado->num_rows>0){
 
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
