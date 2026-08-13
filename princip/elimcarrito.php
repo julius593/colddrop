@@ -19,4 +19,10 @@ if (!empty($codigo) && !empty($idPedido)) {
     $conn->query($sql);
 }
 
+// 4. Redirigimos al usuario de vuelta a su carrito para ver la lista actualizada
+header("Location: micarrito.php?idPedido=" . $idPedido);
+exit;
+?>
+
+
 
