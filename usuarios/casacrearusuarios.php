@@ -42,3 +42,31 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
+
+<?php
+// ========================================================
+// FORMULARIO DE EDICIÓN DE USUARIOS (ACTUALIZARUSUARIOS.PHP)
+// ========================================================
+include_once '../conexion.php';
+
+if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
+    @session_start();
+}
+
+$CI = isset($_GET['CI']) ? $_GET['CI'] : '';
+$Nombre = $Direccion = $Celular = $Rol = $Estado = '';
+
+if (!empty($CI)) {
+    $sql = "SELECT * FROM usuarios WHERE CI = '$CI'";
+    $resultado = $conexion->query($sql);
+    if ($resultado && $resultado->num_rows > 0) {
+        $fila = $resultado->fetch_assoc();
+        $CI = $fila['CI'];
+        $Nombre = isset($fila['Nombre']) ? $fila['Nombre'] : '';
+        $Direccion = isset($fila['Direccion']) ? $fila['Direccion'] : '';
+        $Celular = isset($fila['Celular']) ? $fila['Celular'] : '';
+        $Rol = isset($fila['Rol']) ? $fila['Rol'] : 'cliente';
+        $Estado = isset($fila['Estado']) ? $fila['Estado'] : 'Activo';
+    }
+}
+?>
