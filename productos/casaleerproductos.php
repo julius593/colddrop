@@ -49,7 +49,14 @@ if (!empty($Codigo)) {
                 
                 <h3><i class="fa-solid fa-tag"></i> <?php echo htmlspecialchars($productoData['Nombre']); ?></h3>
                 
-     
+                <ul class="profile-info" style="text-align: left;">
+                    <li><strong>Código:</strong> <?php echo htmlspecialchars($productoData['Codigo']); ?></li>
+                    <li><strong>Tipo de Prenda:</strong> <?php echo htmlspecialchars($productoData['Tipo']); ?></li>
+                    <li><strong>Talla:</strong> <?php echo htmlspecialchars($productoData['Talla']); ?></li>
+                    <li><strong>Color:</strong> <?php echo htmlspecialchars($productoData['Color']); ?></li>
+                    <li><strong>Precio:</strong> $<?php echo number_format($productoData['Costo'], 2); ?></li>
+                    <li><strong>Stock Disponible:</strong> <?php echo htmlspecialchars($productoData['Stock']); ?> unidades</li>
+                </ul>
                 
                 <a href="leerproductos.php" class="btn-admin secundario">← Volver a Inventario de Productos</a>
             </div>
