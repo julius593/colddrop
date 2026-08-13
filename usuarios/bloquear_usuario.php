@@ -14,22 +14,3 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
     exit();
 }
 
-$CI = isset($_GET['CI']) ? $_GET['CI'] : '';
-
-if (!empty($CI)) {
-    // Consultamos el estado actual del usuario
-    $sqlSel = "SELECT Estado FROM usuarios WHERE CI = '$CI'";
-    $resSel = $conexion->query($sqlSel);
-    if ($resSel && $resSel->num_rows > 0) {
-        $user = $resSel->fetch_assoc();
-        $nuevoEstado = ($user['Estado'] === 'Bloqueado') ? 'Activo' : 'Bloqueado';
-        
-        $sqlUpd = "UPDATE usuarios SET Estado = '$nuevoEstado' WHERE CI = '$CI'";
-        $conexion->query($sqlUpd);
-    }
-}
-
-// Redireccionamos a la lista de usuarios
-header("Location: leerusuarios.php");
-exit();
-?>
