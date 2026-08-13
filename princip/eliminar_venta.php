@@ -22,3 +22,8 @@ if (!empty($idVenta)) {
     $sqlDel = "DELETE FROM ventas WHERE idVenta = '$idVenta'";
     $conn->query($sqlDel);
 }
+
+
+header("Location: leer_ventas.php");
+exit();
+?>
