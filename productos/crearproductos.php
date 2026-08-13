@@ -92,17 +92,6 @@ if (session_status() === PHP_SESSION_NONE) {
         </form>
 
         <!-- Botón para retornar al Panel Admin si la sesión lo amerita -->
-        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrador'): ?>
-            <a href="../princip/Administrador.php" class="links">← Volver al Panel Admin</a>
-        <?php else: ?>
-            <a href="../princip/poleras.php" class="links">Volver al Inicio</a>
-        <?php endif; ?>
-    </div>
 
-    <!-- Incluimos el pie de página -->
-    <?php include '../princip/footer.php'; ?>
-
-    <!-- Script de validación JavaScript externo -->
-    <script src="../js/validar_producto.js"></script>
 </body>
 </html>
