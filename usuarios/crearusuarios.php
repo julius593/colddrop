@@ -111,4 +111,3 @@ if (session_status() === PHP_SESSION_NONE) {
     <script src="../js/validar_usuario.js"></script>
 </body>
 </html>
-
