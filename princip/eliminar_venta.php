@@ -14,3 +14,11 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
     header("Location: leer_ventas.php");
     exit();
 }
+
+
+$idVenta = isset($_GET['idVenta']) ? $_GET['idVenta'] : '';
+
+if (!empty($idVenta)) {
+    $sqlDel = "DELETE FROM ventas WHERE idVenta = '$idVenta'";
+    $conn->query($sqlDel);
+}
