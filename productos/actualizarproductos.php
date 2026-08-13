@@ -11,21 +11,7 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
 $Codigo = isset($_GET['Codigo']) ? $_GET['Codigo'] : '';
 $Nombre = $Tipo = $Talla = $Color = $Costo = $Stock = $Imagen = '';
 
-if (!empty($Codigo)) {
-    $sql = "SELECT * FROM productos WHERE Codigo = '$Codigo'";
-    $resultado = $conexion->query($sql);
-    if ($resultado && $resultado->num_rows > 0) {
-        $fila = $resultado->fetch_assoc();
-        $Codigo = $fila['Codigo'];
-        $Nombre = isset($fila['Nombre']) ? $fila['Nombre'] : '';
-        $Tipo = isset($fila['Tipo']) ? $fila['Tipo'] : 'Polera';
-        $Talla = isset($fila['Talla']) ? $fila['Talla'] : '';
-        $Color = isset($fila['Color']) ? $fila['Color'] : '';
-        $Costo = isset($fila['Costo']) ? $fila['Costo'] : '0';
-        $Stock = isset($fila['Stock']) ? $fila['Stock'] : '0';
-        $Imagen = isset($fila['Imagen']) ? $fila['Imagen'] : '';
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
