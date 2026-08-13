@@ -27,3 +27,10 @@ $total = isset($totalRow['total']) && $totalRow['total'] !== null ? (float)$tota
 $sqlCart = "SELECT count(*) as cant FROM Carrito WHERE PEDIDOS_idPEDIDOS = '$idPedido'";
 $resCart = $conn->query($sqlCart);
 $cantItems = $resCart ? $resCart->fetch_assoc()['cant'] : 0;
+
+echo json_encode([
+    "success" => true,
+    "total" => number_format($total, 2),
+    "cantItems" => $cantItems
+]);
+?>
