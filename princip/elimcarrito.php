@@ -15,4 +15,8 @@ if (!empty($codigo) && !empty($idPedido)) {
     $codigo = $conn->real_escape_string($codigo);
     $idPedido = (int)$idPedido;
 
-    
+     $sql = "DELETE FROM Carrito WHERE PRODUCTOS_Codigo = '$codigo' AND PEDIDOS_idPEDIDOS = $idPedido";
+    $conn->query($sql);
+}
+
+
