@@ -106,3 +106,24 @@ body {
     font-weight: 600;
     margin-top: 8px;
 }
+
+
+
+/* ========================================================
+   ESTILOS COMPARTIDOS DE CATÁLOGOS (CATALOGO.CSS)
+   ======================================================== */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f6;
+}
+
+.imagen {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
