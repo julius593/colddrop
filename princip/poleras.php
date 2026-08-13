@@ -89,32 +89,7 @@ $resultado = $conexion->query($sql);
         <h2 style="font-size: 24px; color: #555;">Descubre nuestras poleras, Cold Wave T-shirt</h2>
     </section>
 
-    <script>
-    function agregarCard(codigo, idPedido, costo) {
-        const formData = new FormData();
-        formData.append('Codigo', codigo);
-        formData.append('id_PEDIDOS', idPedido);
-        formData.append('Costo', costo);
-        formData.append('cantidad', 1);
 
-        fetch('agregar_ajax.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                alert('¡Producto añadido al carrito exitosamente!');
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert('Error al añadir al carrito');
-        });
-    }
-    </script>
 
     <?php include 'footer.php'; ?>    
 </body>
