@@ -14,3 +14,5 @@ if (empty($codigo) || empty($idPedido)) {
     echo json_encode(["success" => false, "message" => "Datos incompletos"]);
     exit();
 }
+$sqlDel = "DELETE FROM Carrito WHERE PRODUCTOS_Codigo = '$codigo' AND PEDIDOS_idPEDIDOS = '$idPedido'";
+$conn->query($sqlDel);
