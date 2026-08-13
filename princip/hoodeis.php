@@ -41,49 +41,7 @@ $resultado = $conexion->query($sql);
     <link rel="stylesheet" href="../css/catalogo.css">
 </head>
 <body>
-    <?php include 'header.php'; ?>
 
-    <section>
-        <h1 id="nombrecollect">Nuestros Hoodies</h1>
-        
-        <div id="imagenes">
-            <?php
-            if ($resultado && $resultado->num_rows > 0) {
-                while ($fila = $resultado->fetch_assoc()) {
-                    $img = !empty($fila['Imagen']) ? $fila['Imagen'] : 'default.jpg';
-                    $stock = (int)$fila['Stock'];
-                    $codigo = htmlspecialchars($fila['Codigo']);
-                    $costo = htmlspecialchars($fila['Costo']);
-                    ?>
-                    <div class="card">
-                        <img class="imagen" src="../imagenes/<?php echo htmlspecialchars($img); ?>" alt="Hoodie">
-                        <div class="texto">
-                            <p style="font-size: 18px; font-weight: bold; margin-bottom: 5px;"><?php echo htmlspecialchars($fila['Nombre']); ?></p>
-                            <p style="font-size: 15px; margin:0;"><?php echo htmlspecialchars($fila['Talla']) . " - $" . number_format($costo, 2); ?></p>
-                            
-                            <div>
-                                <span class="stock-tag" style="background:<?php echo ($stock > 0 ? '#28a745' : '#dc3545'); ?>; color:#fff;">
-                                    Stock: <?php echo $stock; ?> unid.
-                                </span>
-                            </div>
-
-                            <?php if ($stock > 0): ?>
-                                <button class="btn-card-cart" onclick="agregarCard('<?php echo $codigo; ?>', '<?php echo $id_PEDIDOS; ?>', '<?php echo $costo; ?>');">
-                                    <i class="fa-solid fa-cart-plus"></i> Añadir al Carrito
-                                </button>
-                            <?php else: ?>
-                                <button class="btn-card-cart" disabled>Agotado</button>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "<p style='text-align:center;'>No hay hoodies disponibles por el momento.</p>";
-            }
-            ?>
-        </div>
-    </section>
 
     <section style="text-align: center; margin: 40px 0;">
         <h2 style="font-size: 24px; color: #555;">Conoce nuestras Hoodies, Urban Style</h2>

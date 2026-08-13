@@ -86,8 +86,7 @@ if (!empty($CI)) {
                         <option value="Inactivo" <?php echo ($Estado === 'Inactivo') ? 'selected' : ''; ?>>Inactivo</option>
                     </select>
                 </div>
-
-                <div class="form-group full-width">
+               <div class="form-group full-width">
                     <input type="submit" value="Guardar Cambios">
                 </div>
             </div>
