@@ -31,6 +31,7 @@
         <!-- Botones de navegación adicional -->
         <a href="../usuarios/crearusuarios.php" class="links">Registrar Nuevo Usuario</a>
         <a href="inicio.php" class="links">← Volver al Inicio</a>
+        
     </div>
 </body>
 </html>
