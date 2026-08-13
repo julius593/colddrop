@@ -27,7 +27,45 @@ $sql = "SELECT * FROM productos WHERE Tipo = 'Polera'";
 $resultado = $conexion->query($sql);
 ?>
 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poleras - ColdDrop</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/catalogo.css">
+</head>
+<body>
+    <?php include 'header.php'; ?>
 
+    <section>
+        <h1 id="nombrecollect">Nuestras Poleras</h1>
+        
+        <div id="imagenes">
+            <?php
+            if ($resultado && $resultado->num_rows > 0) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $img = !empty($fila['Imagen']) ? $fila['Imagen'] : 'default.jpg';
+                    $stock = (int)$fila['Stock'];
+                    $codigo = htmlspecialchars($fila['Codigo']);
+                    $costo = htmlspecialchars($fila['Costo']);
+                    ?>
+                    <div class="card">
+                        <img class="imagen" src="../imagenes/<?php echo htmlspecialchars($img); ?>" alt="Polera">
+                        <div class="texto">
+                            <p style="font-size: 18px; font-weight: bold; margin-bottom: 5px;"><?php echo htmlspecialchars($fila['Nombre']); ?></p>
+                            <p style="font-size: 15px; margin:0;"><?php echo htmlspecialchars($fila['Talla']) . " - $" . number_format($costo, 2); ?></p>
+                            
+                            <div>
+                                <span class="stock-tag" style="background:<?php echo ($stock > 0 ? '#28a745' : '#dc3545'); ?>; color:#fff;">
+                                    Stock: <?php echo $stock; ?> unid.
+                                </span>
+                            </div>
 
                             <?php if ($stock > 0): ?>
                                 <button class="btn-card-cart" onclick="agregarCard('<?php echo $codigo; ?>', '<?php echo $id_PEDIDOS; ?>', '<?php echo $costo; ?>');">
