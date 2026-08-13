@@ -314,5 +314,6 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
     <div class="no-print">
         <?php include 'footer.php'; ?>
     </div>
+    <img src="" >
 </body>
 </html>
