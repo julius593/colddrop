@@ -50,3 +50,16 @@ footer {
 #logofooter {
     width: 150px;
 }
+
+
+/* ========================================================
+   ESTILOS DEL PANEL DE ADMINISTRACIÓN (ADMIN.CSS)
+   ======================================================== */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
