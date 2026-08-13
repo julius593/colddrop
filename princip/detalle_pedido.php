@@ -1,3 +1,33 @@
+<?php
+// ========================================================
+// COMPROBANTE DE PEDIDO E IMPRESIÓN PDF (DETALLE_PEDIDO.PHP)
+// ========================================================
+include_once '../conexion.php';
+
+if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
+    @session_start();
+}
+
+$idPedido = isset($_GET['idPedido']) ? (int)$_GET['idPedido'] : 0;
+
+if (empty($idPedido)) {
+    header("Location: micarrito.php");
+    exit();
+}
+
+// Actualizar estado del pedido si se envió el formulario por Admin/Vendedor
+if (isset($_POST['actualizarEstado'])) {
+    $puedeActualizar = isset($_SESSION['rol']) && ($_SESSION['rol'] === 'Administrador' || $_SESSION['rol'] === 'vendedor');
+    $estadosPermitidos = ['Pendiente', 'En proceso', 'Entregado'];
+    $nuevoEstado = isset($_POST['Estado']) ? $_POST['Estado'] : '';
+
+    if (!$puedeActualizar || !in_array($nuevoEstado, $estadosPermitidos, true)) {
+        http_response_code(403);
+        exit('No tienes permiso para actualizar este pedido.');
+    }
+    $sqlUpdateState = "UPDATE pedidos SET Estado = '$nuevoEstado' WHERE idPEDIDOS = '$idPedido'";
+    $conn->query($sqlUpdateState);
+}
 
 // 1. Consultar información del pedido
 $sqlPedido = "SELECT * FROM pedidos WHERE idPEDIDOS = '$idPedido'";
