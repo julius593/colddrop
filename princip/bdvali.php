@@ -1,3 +1,27 @@
+<?php
+// ========================================================
+// VALIDACIÓN DE USUARIO Y CONTRASEÑA EN LA BASE DE DATOS
+// ========================================================
+
+// 1. Iniciamos la sesión de PHP para guardar datos del usuario logueado
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 2. Incluimos la conexión a la base de datos
+include_once '../conexion.php';
+
+// 3. Recibimos los datos enviados desde el formulario de iniciosesion.php
+$usuario = isset($_POST['Usuario']) ? $_POST['Usuario'] : '';
+$contrasena = isset($_POST['Contrasena']) ? $_POST['Contrasena'] : '';
+
+// 4. Consultamos si existe un usuario con esas credenciales exactas
+$sql = "SELECT * FROM usuarios WHERE Usuario='$usuario' AND Contrasena='$contrasena'";
+$resultado = mysqli_query($conexion, $sql);
+
+// 5. Si encontramos coincidencia (al menos 1 fila), se verifica estado
+if ($resultado && mysqli_num_rows($resultado) > 0) {
+    $fila = mysqli_fetch_assoc($resultado);
 
     // Verificamos si el usuario está bloqueado o inactivo
     if (isset($fila['Estado']) && ($fila['Estado'] === 'Bloqueado' || $fila['Estado'] === 'Inactivo')) {
