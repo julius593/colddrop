@@ -86,17 +86,3 @@ if (!empty($CI)) {
                         <option value="Inactivo" <?php echo ($Estado === 'Inactivo') ? 'selected' : ''; ?>>Inactivo</option>
                     </select>
                 </div>
-
-                <div class="form-group full-width">
-                    <input type="submit" value="Guardar Cambios">
-                </div>
-            </div>
-        </form>
-
-        <a href="leerusuarios.php" class="links">← Volver a Lista de Usuarios</a>
-    </div>
-
-    <!-- Incluimos el pie de página -->
-    <?php include '../princip/footer.php'; ?>
-</body>
-</html>
