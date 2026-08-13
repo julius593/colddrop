@@ -7,3 +7,10 @@ include_once '../conexion.php';
 if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
     @session_start();
 }
+
+
+// Verificación estricta de permisos de Administrador
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
+    header("Location: leer_ventas.php");
+    exit();
+}
