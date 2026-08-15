@@ -314,6 +314,6 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
     <div class="no-print">
         <?php include 'footer.php'; ?>
     </div>
-    <img src="" >
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost/proyectoColdDrop/princip/detalle_pedido.php?idPedido=2" >
 </body>
 </html>
