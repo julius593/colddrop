@@ -3,17 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-06-2026 a las 02:13:55
--- Versión del servidor: 8.0.44
+-- Tiempo de generación: 17-08-2026 a las 04:44:29
+-- Versión del servidor: 8.0.46
 -- Versión de PHP: 8.2.12
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"; 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-create database colddrop;
-
-use colddrop;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,18 +42,11 @@ CREATE TABLE `carrito` (
 
 CREATE TABLE `pedidos` (
   `idPEDIDOS` int NOT NULL,
-  `Nombre` varchar(45) DEFAULT NULL,
+  `Nombre` varchar(255) DEFAULT NULL,
   `Fecha` varchar(45) DEFAULT NULL,
   `Estado` varchar(45) DEFAULT NULL,
   `NombreVendedor` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Volcado de datos para la tabla `pedidos`
---
-
-INSERT INTO `pedidos` (`idPEDIDOS`, `Nombre`, `Fecha`, `Estado`, `NombreVendedor`) VALUES
-(1, 'Cliente General', '2026-06-22', 'En Proceso', 'General');
 
 -- --------------------------------------------------------
 
@@ -90,7 +80,7 @@ INSERT INTO `productos` (`Codigo`, `Nombre`, `Tipo`, `Talla`, `Color`, `Costo`, 
 ('H008', 'Hoodie Wave Vintage', 'Hoodie', 'L', 'Gris Lavado', '240', '6', 'hoodie 8.jpg'),
 ('P001', 'Polera Wave Negra', 'Polera', 'M', 'Negro', '79', '20', 'polera1.jpg'),
 ('P002', 'Polera Wave Blanca', 'Polera', 'L', 'Blanco', '79', '15', 'polera2.jpg'),
-('P003', 'Polera Wave Azul', 'Polera', 'S', 'Azul', '85', '10', 'polera3.jpg'),
+('P003', 'Polera Wave Azul', 'Polera', 'S', 'Azul', '85', '8', 'polera3.jpg'),
 ('P004', 'Polera Wave Ploma', 'Polera', 'XL', 'Gris', '85', '12', 'polera4.jpg'),
 ('P005', 'Polera Wave Roja', 'Polera', 'M', 'Rojo', '79', '8', 'polera5.jpg'),
 ('P006', 'Polera Wave Beige', 'Polera', 'L', 'Beige', '90', '14', 'polera6.jpg'),
@@ -136,8 +126,23 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`Nombre`, `Apellido`, `Usuario`, `Contrasena`, `Direccion`, `Celular`, `Rol`, `Estado`, `CI`) VALUES
-('Admin', 'Sistema', 'admin', 'admin123', 'Oficina Central', '77777777', 'Administrador', 'Activo', '1111'),
-('Juan', 'Vendedor', 'juan', 'juan123', 'Tienda 1', '66666666', 'vendedor', 'Activo', '2222');
+('Admin', 'Sistema', 'admin', 'admin123', 'Oficina Central', '77777777', 'Administrador', 'Activo', '1111');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `idVenta` int NOT NULL,
+  `PEDIDOS_idPEDIDOS` int NOT NULL,
+  `Fecha` varchar(100) NOT NULL,
+  `MontoTotal` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `NombreVendedor` varchar(150) NOT NULL,
+  `Cliente` varchar(255) NOT NULL,
+  `Estado` varchar(50) NOT NULL DEFAULT 'Completada'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Índices para tablas volcadas
@@ -170,6 +175,13 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`CI`);
 
 --
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`idVenta`),
+  ADD KEY `PEDIDOS_idPEDIDOS` (`PEDIDOS_idPEDIDOS`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -177,7 +189,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `idPEDIDOS` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPEDIDOS` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `idVenta` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
