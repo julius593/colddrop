@@ -10,6 +10,9 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+create database colddrop;
+
+use colddrop;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -26,6 +29,7 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `carrito`
 --
+
 
 CREATE TABLE `carrito` (
   `PRODUCTOS_Codigo` varchar(45) NOT NULL,
