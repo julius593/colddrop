@@ -74,8 +74,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <label for="Rol">Rol</label>
                     <select name="Rol" id="Rol">
                         <option value="cliente" selected>cliente</option>
-                        <option value="vendedor" selected>vendedor</option>
-                        <option value="Administrador" selected>Administrador</option>
                         <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrador'): ?>
                             <option value="vendedor">vendedor</option>
                             <option value="Administrador">Administrador</option>
