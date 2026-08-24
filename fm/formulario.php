@@ -42,7 +42,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <div class="form-container" style="margin: 40px auto;">
 
-    <form action="guardar_medioambiental.php"
+    <form action="guardar_formulario.php"
           method="POST"
           id="formMedioambiental">
 
@@ -56,17 +56,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <div class="form-group">
 
-                <label for="Nombre">
-                    Nombre
-                </label>
-
-                <input
-                    type="text"
-                    name="Nombre"
-                    id="Nombre"
-                    placeholder="Ingresa tu nombre"
-                    required
-                >
+<label for="Nombre">Nombre </label>
+<input type="text" name="Nombre" id="Nombre"
+                    placeholder="Ingresa tu nombre" required>
 
             </div>
 

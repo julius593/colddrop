@@ -1,49 +1,32 @@
 <?php
 // ========================================================
-// LISTA DE FORMULARIOS MEDIOAMBIENTALES - COLDDROP
+// LISTA DE FORMULARIOS MEDIOAMBIENTALES - COLDROP
 // ========================================================
 
 include_once '../conexion.php';
 
-
-// ========================================================
-// INICIAR SESIÓN
-// ========================================================
-
 if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
-    session_start();
+    @session_start();
 }
 
-
 // ========================================================
-// SEGURIDAD
-// SOLO EL ADMINISTRADOR PUEDE ACCEDER
+// VERIFICAR QUE SEA ADMINISTRADOR
 // ========================================================
 
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
-
     header('Location: ../princip/iniciosesion.php');
     exit();
-
 }
 
-
 // ========================================================
-// CONSULTAR FORMULARIOS MEDIOAMBIENTALES
+// OBTENER FORMULARIOS MEDIOAMBIENTALES
 // ========================================================
 
-$sql = "SELECT * FROM medioambiental ORDER BY Fecha DESC";
+$sql = "SELECT *
+        FROM medioambiental
+        ORDER BY id_medioambiental DESC";
 
 $resultado = $conexion->query($sql);
-
-
-// Verificar si hubo error en la consulta
-
-if (!$resultado) {
-
-    die("Error al consultar los formularios: " . $conexion->error);
-
-}
 
 ?>
 
@@ -62,8 +45,7 @@ if (!$resultado) {
         Formularios Medioambientales - ColdDrop
     </title>
 
-
-    <!-- Google Fonts -->
+    <!-- FUENTES -->
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -75,12 +57,10 @@ if (!$resultado) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
           rel="stylesheet">
 
-
-    <!-- Font Awesome -->
+    <!-- ICONOS -->
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
     <!-- CSS -->
 
@@ -89,19 +69,26 @@ if (!$resultado) {
 
 </head>
 
-
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <?php include '../princip/header.php'; ?>
 
 
+<!-- =====================================================
+     CONTENEDOR PRINCIPAL
+===================================================== -->
+
 <div class="admin-container">
 
 
-    <!-- ==================================================
+    <!-- =================================================
          ENCABEZADO
-         ================================================== -->
+    ================================================== -->
 
     <div class="admin-header-flex">
 
@@ -123,22 +110,14 @@ if (!$resultado) {
 
             </a>
 
-
-            <a href="formulario.php"
-               class="btn-crear">
-
-                + Nuevo Formulario
-
-            </a>
-
         </div>
 
     </div>
 
 
-    <!-- ==================================================
+    <!-- =================================================
          TABLA
-         ================================================== -->
+    ================================================== -->
 
     <div class="table-responsive">
 
@@ -154,7 +133,7 @@ if (!$resultado) {
 
                     <th>Apellido</th>
 
-                    <th>Tipo de Aporte</th>
+                    <th>Tipo de aporte</th>
 
                     <th>Importancia</th>
 
@@ -164,7 +143,9 @@ if (!$resultado) {
 
                     <th>Fecha</th>
 
-                    <th>Acciones</th>
+                    <th style="text-align:center;">
+                        Acciones
+                    </th>
 
                 </tr>
 
@@ -173,114 +154,210 @@ if (!$resultado) {
 
             <tbody>
 
-
             <?php
 
-            if ($resultado->num_rows > 0) {
+            // =================================================
+            // COMPROBAR RESULTADOS
+            // =================================================
 
+            if ($resultado && $resultado->num_rows > 0) {
 
                 while ($fila = $resultado->fetch_assoc()) {
 
 
-                    // ==================================================
-                    // PROTEGER LOS DATOS
-                    // ==================================================
+                    // =============================================
+                    // PROTEGER INFORMACIÓN
+                    // =============================================
 
-                    $id = htmlspecialchars($fila['id']);
+                    $id = htmlspecialchars(
+                        $fila['id_medioambiental']
+                    );
 
-                    $nombre = htmlspecialchars($fila['Nombre']);
+                    $nombre = htmlspecialchars(
+                        $fila['Nombre'] ?? ''
+                    );
 
-                    $apellido = htmlspecialchars($fila['Apellido']);
+                    $apellido = htmlspecialchars(
+                        $fila['Apellido'] ?? ''
+                    );
 
-                    $tipo = htmlspecialchars($fila['Tipo']);
+                    $tipo = htmlspecialchars(
+                        $fila['Tipo'] ?? ''
+                    );
 
-                    $importancia = htmlspecialchars($fila['Importancia']);
+                    $importancia = htmlspecialchars(
+                        $fila['Importancia'] ?? ''
+                    );
 
-                    $comentario = htmlspecialchars($fila['Comentario']);
+                    $comentario = htmlspecialchars(
+                        $fila['Comentario'] ?? ''
+                    );
 
-                    $propuesta = htmlspecialchars($fila['Propuesta']);
+                    $propuesta = htmlspecialchars(
+                        $fila['Propuesta'] ?? ''
+                    );
 
-                    $fecha = htmlspecialchars($fila['Fecha']);
+                    $fecha = htmlspecialchars(
+                        $fila['Fecha'] ?? ''
+                    );
 
 
-                    // ==================================================
+                    // =============================================
                     // MOSTRAR FILA
-                    // ==================================================
+                    // =============================================
 
                     echo "<tr>";
 
 
-                    echo "<td>$id</td>";
+                    // ID
 
-                    echo "<td>$nombre</td>";
-
-                    echo "<td>$apellido</td>";
-
-                    echo "<td>$tipo</td>";
+                    echo "<td>
+                            $id
+                          </td>";
 
 
-                    // ==================================================
-                    // IMPORTANCIA CON COLOR
-                    // ==================================================
+                    // NOMBRE
+
+                    echo "<td>
+                            $nombre
+                          </td>";
+
+
+                    // APELLIDO
+
+                    echo "<td>
+                            $apellido
+                          </td>";
+
+
+                    // TIPO
+
+                    echo "<td>
+                            $tipo
+                          </td>";
+
+
+                    // IMPORTANCIA
+
+                    echo "<td>";
 
                     if ($importancia === 'Alta') {
 
-                        echo "<td>
-                                <span class='estado-alto'>
-                                    $importancia
-                                </span>
-                              </td>";
+                        echo "<span style='
+                            color:#dc3545;
+                            font-weight:600;
+                        '>
+                            🔴 Alta
+                        </span>";
 
                     } elseif ($importancia === 'Media') {
 
-                        echo "<td>
-                                <span class='estado-medio'>
-                                    $importancia
-                                </span>
-                              </td>";
+                        echo "<span style='
+                            color:#fd7e14;
+                            font-weight:600;
+                        '>
+                            🟠 Media
+                        </span>";
 
                     } else {
 
-                        echo "<td>
-                                <span class='estado-bajo'>
-                                    $importancia
-                                </span>
-                              </td>";
+                        echo "<span style='
+                            color:#28a745;
+                            font-weight:600;
+                        '>
+                            🟢 Baja
+                        </span>";
 
                     }
 
-
-                    echo "<td>$comentario</td>";
-
-                    echo "<td>$propuesta</td>";
-
-                    echo "<td>$fecha</td>";
+                    echo "</td>";
 
 
-                    // ==================================================
+                    // COMENTARIO
+
+                    echo "<td style='max-width:250px;'>";
+
+                    echo nl2br(
+                        $comentario
+                    );
+
+                    echo "</td>";
+
+
+                    // PROPUESTA
+
+                    echo "<td style='max-width:250px;'>";
+
+                    if ($propuesta !== '') {
+
+                        echo nl2br(
+                            $propuesta
+                        );
+
+                    } else {
+
+                        echo "<span style='color:#888;'>
+                                Sin propuesta
+                              </span>";
+
+                    }
+
+                    echo "</td>";
+
+
+                    // FECHA
+
+                    echo "<td>
+                            $fecha
+                          </td>";
+
+
+                    // =============================================
                     // ACCIONES
-                    // ==================================================
+                    // =============================================
 
                     echo "<td style='text-align:center;'>";
 
 
-                    echo "<a href='detalle_medioambiental.php?id=$id'
-                              class='btn-action btn-mostrar'>
+                    // EDITAR
 
-                            <i class='fa-solid fa-eye'></i>
-                            Ver
+                    echo "
+                    <a
+                        href='actualizar_medioambiental.php?id_medioambiental=$id'
+                        class='btn-action btn-editar'
+                    >
+                        ✏️ Editar
+                    </a>
+                    ";
 
-                          </a>";
+
+                    // ELIMINAR
+
+                    echo "
+                    <a
+                        href='eliminar_medioambiental.php?id_medioambiental=$id'
+                        class='btn-action btn-eliminar'
+                        onclick='
+                            return confirm(
+                                \"¿Estás seguro de eliminar este formulario?\"
+                            );
+                        '
+                    >
+                        🗑️ Eliminar
+                    </a>
+                    ";
 
 
-                    echo "<a href='eliminar_medioambiental.php?id=$id'
-                              class='btn-action btn-eliminar'
-                              onclick=\"return confirm('¿Estás seguro de eliminar este formulario?');\">
+                    // DETALLES
 
-                            <i class='fa-solid fa-trash'></i>
-                            Eliminar
-
-                          </a>";
+                    echo "
+                    <a
+                        href='casaleer_medioambiental.php?id_medioambiental=$id'
+                        class='btn-action btn-mostrar'
+                    >
+                        👁️ Detalles
+                    </a>
+                    ";
 
 
                     echo "</td>";
@@ -290,27 +367,34 @@ if (!$resultado) {
 
                 }
 
-
             } else {
 
+                echo "
+                <tr>
 
-                echo "<tr>";
+                    <td
+                        colspan='9'
+                        style='text-align:center;'
+                    >
 
-                echo "<td colspan='9'
-                        style='text-align:center; padding:30px;'>";
+                        🌱 No hay formularios
+                        medioambientales registrados.
 
-                echo "<i class='fa-solid fa-leaf'></i>
-                      No existen formularios medioambientales registrados.";
+                    </td>
 
-                echo "</td>";
-
-                echo "</tr>";
+                </tr>
+                ";
 
             }
 
 
-            ?>
+            // =================================================
+            // CERRAR CONEXIÓN
+            // =================================================
 
+            $conexion->close();
+
+            ?>
 
             </tbody>
 
@@ -318,25 +402,16 @@ if (!$resultado) {
 
     </div>
 
-
 </div>
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <?php include '../princip/footer.php'; ?>
-
-
-<?php
-
-// ========================================================
-// CERRAR CONEXIÓN
-// ========================================================
-
-$conexion->close();
-
-?>
 
 
 </body>
 
 </html>
-
