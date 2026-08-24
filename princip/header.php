@@ -72,6 +72,7 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
                 <a class="menu" href="../usuarios/crearusuarios.php">Register</a>
             </div>
         <?php endif; ?>
+         
 <div>
     <a class="menu" href="../fm/formulario.php">FORMULARIO</a>
 </div>
