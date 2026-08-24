@@ -40,9 +40,9 @@
         <div class="social-box">
             <h4>Síguenos</h4>
             <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/?locale=es_LA"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#"><i class="fa-regular fa-envelope"></i></a>
             </div>
         </div>
