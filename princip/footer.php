@@ -32,6 +32,8 @@
             <h4 style="margin-bottom: 10px;">Comunícate con Nosotros</h4>
             <li style="list-style: none;"><a class="listafooter" href="mailto:contacto@colddrop.bo">Gmail</a></li>
             <li style="list-style: none;"><a class="listafooter" href="https://chat.whatsapp.com/FSKwSL02bRd4CEnNvC4PY1" target="_blank">WhatsApp</a></li>
+            <li style="list-style: none;"><a class="listafooter" href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+            <li style="list-style: none;"><a class="listafooter" href="https://www.facebook.com/?locale=es_LA" target="_blank">Facebook</a></li>
         </div>
 
         <!-- Sección 4: Redes sociales -->
