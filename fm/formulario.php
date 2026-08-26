@@ -52,161 +52,71 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="form-grid">
 
 
-            <!-- NOMBRE -->
-
-            <div class="form-group">
-
+<!-- NOMBRE -->
+<div class="form-group">
 <label for="Nombre">Nombre </label>
-<input type="text" name="Nombre" id="Nombre"
-                    placeholder="Ingresa tu nombre" required>
+<input type="text" name="Nombre" id="Nombre" placeholder="Ingresa tu nombre" required>
+</div>
+
+<!-- APELLIDO -->
+<div class="form-group">
+<label for="Apellido"> Apellido </label>
+<input type="text" name="Apellido" id="Apellido" placeholder="Ingresa tu apellido" required>
+</div>
+
+<!-- TIPO DE SUGERENCIA -->
+<div class="form-group">
+<label for="Tipo">Tipo de aporte</label>
+<select name="Tipo" id="Tipo" required>
+<option value="">Selecciona una opción</option>
+<option value="Reciclaje">Reciclaje</option>
+<option value="Reduccion de residuos">Reducción de residuos</option>
+<option value="Reutilizacion">Reutilización</option>
+<option value="Ahorro de recursos">Ahorro de recursos</option>
+<option value="Otro">Otro</option>
+</select>
 
             </div>
 
 
-            <!-- APELLIDO -->
+    <!-- NIVEL DE IMPORTANCIA -->
 
-            <div class="form-group">
+<div class="form-group">
+<label for="Importancia">Importancia</label>
+<select name="Importancia" id="Importancia" required>
+<option value=""> Selecciona </option>
+<option value="Baja">Baja</option>
+<option value="Media">Media</option>
+<option value="Alta">Alta</option>
+</select>
 
-                <label for="Apellido">
-                    Apellido
-                </label>
-
-                <input
-                    type="text"
-                    name="Apellido"
-                    id="Apellido"
-                    placeholder="Ingresa tu apellido"
-                    required
-                >
-
-            </div>
-
-
-            <!-- TIPO DE SUGERENCIA -->
-
-            <div class="form-group">
-
-                <label for="Tipo">
-                    Tipo de aporte
-                </label>
-
-                <select name="Tipo"
-                        id="Tipo"
-                        required>
-
-                    <option value="">
-                        Selecciona una opción
-                    </option>
-
-                    <option value="Reciclaje">
-                        Reciclaje
-                    </option>
-
-                    <option value="Reduccion de residuos">
-                        Reducción de residuos
-                    </option>
-
-                    <option value="Reutilizacion">
-                        Reutilización
-                    </option>
-
-                    <option value="Ahorro de recursos">
-                        Ahorro de recursos
-                    </option>
-
-                    <option value="Otro">
-                        Otro
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- NIVEL DE IMPORTANCIA -->
-
-            <div class="form-group">
-
-                <label for="Importancia">
-                    Importancia
-                </label>
-
-                <select name="Importancia"
-                        id="Importancia"
-                        required>
-
-                    <option value="">
-                        Selecciona
-                    </option>
-
-                    <option value="Baja">
-                        Baja
-                    </option>
-
-                    <option value="Media">
-                        Media
-                    </option>
-
-                    <option value="Alta">
-                        Alta
-                    </option>
-
-                </select>
-
-            </div>
+</div>
 
 
             <!-- COMENTARIO -->
 
-            <div class="form-group full-width">
+<div class="form-group full-width">
+<label for="Comentario">Comentario o sugerencia</label>
+<textarea name="Comentario" id="Comentario" rows="6" placeholder="Escribe tu propuesta o sugerencia..."required></textarea>
 
-                <label for="Comentario">
-                    Comentario o sugerencia
-                </label>
+    </div>
 
-                <textarea
-                    name="Comentario"
-                    id="Comentario"
-                    rows="6"
-                    placeholder="Escribe tu propuesta o sugerencia..."
-                    required
-                ></textarea>
+<!-- PROPUESTA -->
+ <div class="form-group full-width">
+<label for="Propuesta">Propuesta de mejora</label>
+<textarea name="Propuesta" id="Propuesta" rows="5" placeholder="¿Qué propones para mejorar?"></textarea>
 
-            </div>
+     </div>
 
-
-            <!-- PROPUESTA -->
-
-            <div class="form-group full-width">
-
-                <label for="Propuesta">
-                    Propuesta de mejora
-                </label>
-
-                <textarea
-                    name="Propuesta"
-                    id="Propuesta"
-                    rows="5"
-                    placeholder="¿Qué propones para mejorar?"
-                ></textarea>
-
-            </div>
-
-
-            <!-- BOTÓN -->
-
-            <div class="form-group full-width">
-
-                <input
-                    type="submit"
-                    value="Enviar Formulario"
-                >
-
-            </div>
+<!-- BOTÓN -->
+<div class="form-group full-width">
+<input type="submit"  value="Enviar Formulario">
 
         </div>
 
-    </form>
+    </div>
+
+</form>
 
 
     <a href="../princip/inicio.php"
