@@ -21,23 +21,6 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-// ==============================
-// 2. Consulta: producto más vendido del mes
-// ==============================
-// `carrito` guarda el detalle de cada pedido (producto + cantidad).
-// `ventas.PEDIDOS_idPEDIDOS` conecta cada venta con su pedido, que es la
-// misma clave usada en `carrito.PEDIDOS_idPEDIDOS`.
-// `ventas.Fecha` es varchar en formato DD/MM/YYYY, por eso se usa STR_TO_DATE.
-$sql = "SELECT p.Codigo, p.Nombre, p.Imagen, SUM(c.cantidad) AS TotalVendido
-        FROM carrito c
-        INNER JOIN ventas v ON v.PEDIDOS_idPEDIDOS = c.PEDIDOS_idPEDIDOS
-        INNER JOIN productos p ON p.Codigo = c.PRODUCTOS_Codigo
-        WHERE MONTH(STR_TO_DATE(v.Fecha, '%d/%m/%Y')) = MONTH(CURDATE())
-          AND YEAR(STR_TO_DATE(v.Fecha, '%d/%m/%Y')) = YEAR(CURDATE())
-        GROUP BY p.Codigo, p.Nombre, p.Imagen
-        ORDER BY TotalVendido DESC
-        LIMIT 1";
-
 $resultado = $conexion->query($sql);
 $masVendido = $resultado ? $resultado->fetch_assoc() : null;
 
