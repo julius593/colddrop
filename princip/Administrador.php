@@ -78,6 +78,13 @@ $rolAdmin = isset($_SESSION['rol']) ? $_SESSION['rol'] : 'Administrador';
                 <a href="micarrito.php" class="btn-admin secundario">Ver Carrito / Pedidos</a>
                 <a href="leer_ventas.php" class="btn-admin" style="background-color: #28a745;"><i class="fa-solid fa-receipt"></i> Historial de Ventas (CRUD)</a>
             </div>
+               <div class="admin-card">
+                <h3><i class="fa-solid fa-cash-register"></i> Reportes </h3>
+                <p>Registra o ve ls ventas totales </p>
+                <a href=".../rp/ventastotales.php" class="btn-admin">Ventas Totales</a>
+                <a href=".../rp/producto+vendido.php" class="btn-admin secundario">Ingresos Totales</a>
+                <a href=".../rp/ingresostotales.php" class="btn-admin" style="background-color: #28a745;"><i class="fa-solid fa-receipt"></i> Productos con bajo stock</a>
+            </div>
         </div>
     </div>
 
