@@ -6,9 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1></h1>
+    <h1>Reportes</h1>
+    <div class="form-container" style="margin: 40px auto;">
+        <label for="">Por DIA</label>
+        <input type="text">
+    </div>
     <div>
-        <label for=""></label>
+        <label for="">Por SEMANA</label>
+        <input type="text">
+    </div>
+     <div>
+        <label for="">Por MES</label>
+        <input type="text">
+    </div>
+     <div>
+        <label for="">Por AÑO</label>
         <input type="text">
     </div>
 </body>
