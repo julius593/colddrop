@@ -1,0 +1,154 @@
+/* ========================================================
+   ESTILOS GENERALES PARA REPORTES - COLDDROP
+   ======================================================== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.reporte-container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 35px;
+}
+
+.reporte-header {
+    border-bottom: 2px solid #eceff1;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.reporte-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reporte-periodo {
+    background-color: #e9ecef;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, #111111 0%, #2c3e50 100%);
+    color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.metric-card .value {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #2ec4b6;
+}
+
+.metric-card .label {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.85;
+}
+
+.tabla-reporte {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-reporte th, .tabla-reporte td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tabla-reporte th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #212529;
+}
+
+.tabla-reporte tr:hover {
+    background-color: #f1f3f5;
+}
+
+.badge-stock {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.tabs-nav a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tabs-nav a.active {
+    color: #111;
+    border-bottom-color: #111;
+}
+
+.btn-reporte {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-reporte:hover {
+    background-color: #333;
+}
