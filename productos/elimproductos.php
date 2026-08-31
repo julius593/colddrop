@@ -2,13 +2,13 @@
 include_once '../conexion.php';
 
 // 1. Validar que el parámetro llegó
-if (!isset($_GET['idCodigo']) || trim($_GET['idCodigo']) === '') {
+if (!isset($_GET['Codigo']) || trim($_GET['Codigo']) === '') {
     http_response_code(400);
     echo "Error: no se especificó el código del producto.";
     exit;
 }
 
-$codigo = $_GET['idCodigo'];
+$codigo = $_GET['Codigo'];
 
 // 2. Consulta preparada (evita inyección SQL) usando el nombre real de columna
 $sql = "DELETE FROM productos WHERE Codigo = ?";
