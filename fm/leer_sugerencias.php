@@ -10,16 +10,7 @@ if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'Administrador' && $_SESSIO
     exit();
 }
 $contenido = "No hay sugerencias registradas aún en el archivo sugerencias.txt.";
-
-
-
-
-
-
-
-
-
-
-
-
+if (file_exists("sugerencias.txt")) {
+    $contenido = file_get_contents("sugerencias.txt");
+}
 ?>
