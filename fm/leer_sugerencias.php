@@ -14,3 +14,15 @@ if (file_exists("sugerencias.txt")) {
     $contenido = file_get_contents("sugerencias.txt");
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sugerencias Registradas (fwrite) - ColdDrop</title>
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+<body>
+     <?php include '../princip/header.php'; ?>
+     
+</body>
+</html>
