@@ -29,6 +29,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <section class="mision">
         <div class="mision-label">
             <p>Nuestra misión</p>
+            
         </div>
         <div class="mision-content">
             <h2>MÁS QUE ROPA</h2>
@@ -73,8 +74,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <h2>VEN A VER LO QUE TENEMOS</h2>
         <p>La nueva colección ya está disponible. Piezas limitadas, sin reposición.</p>
         <a href="hoodeis.php" class="btn">Ver colección</a>
+        <a class="btn" href="../fm/formulario.php">Formulario</a>
     </section>
-
+ 
     <!-- Incluimos el pie de página -->
     <?php include 'footer.php'; ?>  
 </body>
