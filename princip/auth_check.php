@@ -25,19 +25,7 @@ function verificarAcceso($rolesPermitidos = ['Administrador']) {
             <style>body { font-family: sans-serif; background: #f4f6f8; }</style>
         </head>
         <body>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Acceso Denegado',
-                        text: 'No tienes los permisos necesarios para acceder a esta sección.',
-                        confirmButtonColor: '#111',
-                        confirmButtonText: 'Ir a Iniciar Sesión'
-                    }).then(() => {
-                        window.location.href = '../princip/iniciosesion.php';
-                    });
-                });
-            </script>
+ 
         </body>
         </html>";
         exit();
