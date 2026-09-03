@@ -20,6 +20,7 @@ $sql = "SELECT * FROM ventas WHERE Fecha LIKE '%$hoy%' OR Fecha LIKE '%$hoySql%'
 $resultado = $conn->query($sql);
 
 $totalMonto = 0;
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
