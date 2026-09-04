@@ -73,6 +73,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <h2>VEN A VER LO QUE TENEMOS</h2>
         <p>La nueva colección ya está disponible. Piezas limitadas, sin reposición.</p>
         <a href="hoodeis.php" class="btn">Ver colección</a>
+        
+    <a class="btn" href="../fm/formulario.php">FORMULARIO</a>
+ 
     </section>
 
     <!-- Incluimos el pie de página -->

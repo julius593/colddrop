@@ -73,10 +73,6 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
             </div>
         <?php endif; ?>
          
-<div>
-    <a class="menu" href="../fm/formulario.php">FORMULARIO</a>
-</div>
- 
         <!-- Acceso al Carrito -->
         <div class="carrito">
             <a href="../princip/micarrito.php" class="btn-carrito">
