@@ -196,5 +196,6 @@ $totalBajoStock = $resStock ? (int)$resStock->fetch_assoc()['Total'] : 0;
     <!-- Incluimos el pie de página -->
     <?php include 'footer.php'; ?>
 
+    
 </body>
 </html>

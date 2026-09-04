@@ -75,5 +75,7 @@ $totalMonto = 0;
     </div>
 
     <?php include '../princip/footer.php'; ?>
+    <!-- ===================== SCRIPTS DE LOS GRÁFICOS ===================== -->
+    <script>
 </body>
 </html>

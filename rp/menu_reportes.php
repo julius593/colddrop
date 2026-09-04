@@ -66,7 +66,7 @@ if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'Administrador' && $_SESSIO
         </div>
 
         <div style="margin-top: 20px; text-align: right;">
-            <a href="../princip/Administrador.php" class="btn-admin secundario" style="width: auto; padding: 10px 20px;">← Volver al Panel Admin</a>
+            <a href="../princip/Administrador.php" class="btn-admin secundario" style="width: auto; padding: 10px 20px;">← Volver al panel admin</a>
         </div>
     </div>
 

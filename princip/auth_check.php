@@ -25,7 +25,7 @@ function verificarAcceso($rolesPermitidos = ['Administrador']) {
             <style>body { font-family: sans-serif; background: #f4f6f8; }</style>
         </head>
         <body>
-            <script>
+      <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
                         icon: 'error',
