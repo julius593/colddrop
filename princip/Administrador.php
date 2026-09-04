@@ -91,6 +91,7 @@ $rolAdmin = isset($_SESSION['rol']) ? $_SESSION['rol'] : 'Administrador';
     <!-- Incluimos el pie de página -->
     <?php include 'footer.php'; ?>
 
+    
 </body>
 </html>
 
