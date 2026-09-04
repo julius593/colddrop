@@ -148,16 +148,6 @@ CREATE TABLE `ventas` (
   `Estado` varchar(50) NOT NULL DEFAULT 'Completada'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE medioambiental (
-    id_medioambiental INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL,
-    Apellido VARCHAR(100) NOT NULL,
-    Tipo VARCHAR(100) NOT NULL,
-    Importancia VARCHAR(20) NOT NULL,
-    Comentario TEXT NOT NULL,
-    Propuesta TEXT,
-    Fecha DATETIME DEFAULT CURRENT_TIMESTAMP
-);
 --
 -- Índices para tablas volcadas
 --
@@ -235,4 +225,4 @@ CREATE TABLE medioambiental (
     Comentario TEXT NOT NULL,
     Propuesta TEXT,
     Fecha DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+);

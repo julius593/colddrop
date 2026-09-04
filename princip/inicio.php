@@ -27,17 +27,13 @@
   </section>
 
   <!-- Sección 2: Galería de Muestra / Destacados -->
-<section id="dos">
-  <h1 style="text-align: center; margin-top: 40px;">Nuestra Colección</h1>
-  <div id="imagenesmuestra">
-    <div class="imagen-wrap">
-      <img class="imagenmuestra" src="https://i.pinimg.com/1200x/3d/f9/f1/3df9f135aaa24d4181ae321478a42f42.jpg" alt="Colección 1" loading="lazy">
+  <section id="dos">
+    <h1 style="text-align: center; margin-top: 40px;">Nuestra Colección</h1>
+    <div id="imagenesmuestra">
+      <img class="imagenmuestra" src="https://i.pinimg.com/1200x/3d/f9/f1/3df9f135aaa24d4181ae321478a42f42.jpg" alt="Colección 1">
+      <img class="imagenmuestra" src="https://i.pinimg.com/736x/6c/16/3a/6c163abeb93331246e23e58026ddddc9.jpg" alt="Colección 2">
     </div>
-    <div class="imagen-wrap">
-      <img class="imagenmuestra" src="https://i.pinimg.com/736x/6c/16/3a/6c163abeb93331246e23e58026ddddc9.jpg" alt="Colección 2" loading="lazy">
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Sección 3: Historia y Valores de ColdDrop -->
   <section id="tres">
