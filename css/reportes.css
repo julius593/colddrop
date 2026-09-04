@@ -27,6 +27,24 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
+.reporte-container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 35px;
+}
+
+.reporte-header {
+    border-bottom: 2px solid #eceff1;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 .reporte-header h1 {
     font-size: 24px;
