@@ -1,46 +1,156 @@
 <?php
 // ========================================================
-// GUARDAR FORMULARIO DE SUGERENCIAS - COLDDROP
+// GUARDAR FORMULARIO MEDIOAMBIENTAL - COLDROP
 // ========================================================
+
 include_once '../conexion.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $Nombre = $_POST['Nombre'];
-    $Apellido = $_POST['Apellido'];
-    $Tipo = $_POST['Tipo'];
-    $Importancia = $_POST['Importancia'];
-    $Comentario = $_POST['Comentario'];
-    $Propuesta = isset($_POST['Propuesta']) ? $_POST['Propuesta'] : '';
+// ========================================================
+// COMPROBAR QUE EL FORMULARIO FUE ENVIADO
+// ========================================================
 
-    // 1. Guardar en archivo de texto sugerencias.txt usando fwrite()
-    $fecha = date('Y-m-d H:i:s');
-    $linea = "Fecha: $fecha | Cliente: $Nombre $Apellido | Tipo: $Tipo | Importancia: $Importancia | Comentario: $Comentario\n";
-    
-    $fp = fopen("sugerencias.txt", "a");
-    if ($fp) {
-        fwrite($fp, $linea);
-        fclose($fp);
-    }
-
-    // 2. Guardar en la base de datos MySQL
-    $sql = "INSERT INTO medioambiental (Nombre, Apellido, Tipo, Importancia, Comentario, Propuesta) 
-            VALUES ('$Nombre', '$Apellido', '$Tipo', '$Importancia', '$Comentario', '$Propuesta')";
-    
-    if ($conn->query($sql) === TRUE) {
-        echo "<div style='text-align:center; margin-top:50px; font-family:sans-serif;'>";
-        echo "<h2 style='color:#28a745;'>¡Formulario y sugerencia guardados correctamente!</h2>";
-        echo "<p>Tu comentario ha sido registrado en el sistema.</p>";
-        echo "<a href='../princip/inicio.php' style='display:inline-block; margin-top:15px; padding:10px 20px; background:#111; color:#fff; text-decoration:none; border-radius:6px;'>Volver al Inicio</a>";
-        echo "</div>";
-    } else {
-        echo "Error al guardar en la base de datos: " . $conn->error;
-    }
-} else {
-    header("Location: formulario.php");
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: formulario.php');
     exit();
 }
+
+// ========================================================
+// RECIBIR Y LIMPIAR DATOS
+// ========================================================
+
+$Nombre = trim($_POST['Nombre'] ?? '');
+$Apellido = trim($_POST['Apellido'] ?? '');
+$Tipo = trim($_POST['Tipo'] ?? '');
+$Importancia = trim($_POST['Importancia'] ?? '');
+$Comentario = trim($_POST['Comentario'] ?? '');
+$Propuesta = trim($_POST['Propuesta'] ?? '');
+
+// ========================================================
+// VALIDAR CAMPOS OBLIGATORIOS
+// ========================================================
+
+if (
+    $Nombre === '' ||
+    $Apellido === '' ||
+    $Tipo === '' ||
+    $Importancia === '' ||
+    $Comentario === ''
+) {
+
+    echo "
+    <div style='
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+    '>
+
+        <h2>❌ Faltan datos obligatorios</h2>
+
+        <p>
+            Por favor completa todos los campos requeridos.
+        </p>
+
+        <a href='formulario_medioambiental.php'>
+            Volver al formulario
+        </a>
+
+    </div>
+    ";
+
+    exit();
+}
+
+// ========================================================
+// CONSULTA SQL
+// ========================================================
+
+$sql = "INSERT INTO medioambiental
+        (Nombre, Apellido, Tipo, Importancia, Comentario, Propuesta)
+        VALUES (?, ?, ?, ?, ?, ?)";
+
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+
+    die(
+        "Error al preparar la consulta: "
+        . htmlspecialchars($conn->error)
+    );
+
+}
+
+// ========================================================
+// ASIGNAR VALORES
+// ========================================================
+
+$stmt->bind_param(
+    "ssssss",
+    $Nombre,
+    $Apellido,
+    $Tipo,
+    $Importancia,
+    $Comentario,
+    $Propuesta
+);
+
+// ========================================================
+// EJECUTAR
+// ========================================================
+
+if ($stmt->execute()) {
+
+    echo "
+    <div style='
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+    '>
+
+        <h2>✅ ¡Formulario enviado correctamente!</h2>
+
+        <p>
+            Gracias por compartir tu propuesta medioambiental.
+        </p>
+
+        <a href='../princip/inicio.php'>
+            Volver al Inicio
+        </a>
+
+    </div>
+    ";
+
+} else {
+
+    echo "
+    <div style='
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+    '>
+
+        <h2>❌ Error al guardar el formulario</h2>
+
+        <p>"
+        . htmlspecialchars($stmt->error)
+        . "</p>
+
+        <a href='formulario_medioambiental.php'>
+            Volver al formulario
+        </a>
+
+    </div>
+    ";
+}
+
+// ========================================================
+// CERRAR
+// ========================================================
+
+$stmt->close();
+$conn->close();
+
 ?>

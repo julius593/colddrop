@@ -2,8 +2,14 @@
 // ========================================================
 // PANEL DEL VENDEDOR - COLDDROP
 // ========================================================
-include_once 'auth_check.php';
-verificarAcceso(['vendedor', 'Administrador']);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'vendedor') {
+    header('Location: iniciosesion.php');
+    exit();
+}
 
 // Datos del vendedor en la sesión activa
 $nombreVendedor = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Vendedor';
@@ -57,13 +63,12 @@ $rolVendedor = isset($_SESSION['rol']) ? $_SESSION['rol'] : 'Vendedor';
                 <a href="leer_ventas.php" class="btn-admin" style="background-color: #28a745;"><i class="fa-solid fa-receipt"></i> Mi Historial de Ventas</a>
             </div>
 
-            <!-- TARJETA 3: REPORTES DE VENTAS E INVENTARIO -->
+            <!-- TARJETA 3: CATÁLOGO Y PRODUCTOS -->
             <div class="admin-card">
-                <h3><i class="fa-solid fa-chart-pie"></i> Reportes para Vendedores</h3>
-                <p>Monitorea las ventas diarias y los productos con menor stock.</p>
-                <a href="../rp/ventastotales_dia.php" class="btn-admin"><i class="fa-solid fa-calendar-day"></i> Ventas del Día</a>
-                <a href="../rp/producto_mas_vendido.php" class="btn-admin secundario"><i class="fa-solid fa-trophy"></i> Producto Más Vendido</a>
-                <a href="../rp/bajo_stock.php" class="btn-admin peligro"><i class="fa-solid fa-triangle-exclamation"></i> Productos con Bajo Stock</a>
+                <h3><i class="fa-solid fa-boxes-stacked"></i> Catálogo de Prendas</h3>
+                <p>Consulta las prendas disponibles en el inventario.</p>
+                <a href="poleras.php" class="btn-admin secundario">Ver Poleras</a>
+                <a href="pantalones.php" class="btn-admin secundario">Ver Pantalones</a>
             </div>
         </div>
     </div>

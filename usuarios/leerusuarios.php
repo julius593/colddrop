@@ -4,11 +4,11 @@
 // ========================================================
 include_once '../conexion.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
+    @session_start();
 }
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'Administrador') {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
     header('Location: ../princip/iniciosesion.php');
     exit();
 }

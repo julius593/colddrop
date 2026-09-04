@@ -20,9 +20,6 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Madimi+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- Librería de SweetAlert2 global -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <!-- Hoja de estilos externa para el encabezado -->
     <link rel="stylesheet" href="../css/header.css">
 </head>
@@ -50,11 +47,6 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
             <a class="menu" href="../princip/nosotros.php">Nosotros</a>
         </div>
 
-        <!-- Consultar Estado de Pedido (Sprint 4) -->
-        <div>
-            <a class="menu" href="../princip/consultar_pedido.php" style="color: #28a745; font-weight: 600;"><i class="fa-solid fa-truck-fast"></i> Ver Estado Pedido</a>
-        </div>
-
         <!-- Control de sesión -->
         <?php if (isset($_SESSION['usuario'])): ?>
             <div>
@@ -64,15 +56,9 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
                 <div>
                     <a class="menu" href="../princip/Administrador.php"><i class="fa-solid fa-user-gear"></i> Panel Admin</a>
                 </div>
-                <div>
-                    <a class="menu" href="../rp/menu_reportes.php"><i class="fa-solid fa-chart-pie"></i> Reportes</a>
-                </div>
             <?php elseif (isset($_SESSION['rol']) && $_SESSION['rol'] === 'vendedor'): ?>
                 <div>
                     <a class="menu" href="../princip/vendedor.php"><i class="fa-solid fa-user-tie"></i> Panel Vendedor</a>
-                </div>
-                <div>
-                    <a class="menu" href="../rp/menu_reportes.php"><i class="fa-solid fa-chart-pie"></i> Reportes</a>
                 </div>
             <?php endif; ?>
             <div>
@@ -88,7 +74,7 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
          
 <div>
-    <a class="menu" href="../fm/formulario.php">Formulario</a>
+    <a class="menu" href="../fm/formulario.php">FORMULARIO</a>
 </div>
  
         <!-- Acceso al Carrito -->
