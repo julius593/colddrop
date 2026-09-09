@@ -1,0 +1,145 @@
+/* ========================================================
+   ESTILOS GENERALES DE FORMULARIOS HORIZONTALES (FORMULARIOS.CSS)
+   ======================================================== */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #7a7a7aff, #000000ff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+form {
+    background-color: #fff;
+    padding: 35px 45px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 720px; /* Ancho cómodo para formulario de 2 columnas */
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    color: #000000ff;
+    margin-bottom: 25px;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0;
+}
+
+/* Grilla horizontal de 2 columnas */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+label {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s ease;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #111;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+input[type="submit"] {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #000000ff;
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #222;
+}
+
+.links {
+    display: block;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+label.error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: normal;
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+    form {
+        padding: 25px 20px;
+    }
+}
+
+
+
