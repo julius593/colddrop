@@ -21,7 +21,7 @@ if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'Administrador' && $_SESSIO
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    
+
     <?php include '../princip/footer.php'; ?>
 </body>
 </html>
