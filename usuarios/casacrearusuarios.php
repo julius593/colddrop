@@ -1,3 +1,4 @@
+
 <?php
 // ========================================================
 // PROCESAR E INSERTAR NUEVO USUARIO EN LA BASE DE DATOS
@@ -41,3 +42,4 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
+

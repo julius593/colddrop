@@ -18,6 +18,7 @@ if (!empty($CI)) {
         $usuarioData = $resultado->fetch_assoc();
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,17 +57,19 @@ if (!empty($CI)) {
                     <li><strong>Estado:</strong> <?php echo htmlspecialchars(isset($usuarioData['Estado']) ? $usuarioData['Estado'] : ''); ?></li>
                 </ul>
                 
-                <a href="leerusuarios.php" class="btn-admin secundario">← Volver a Lista de Usuarios</a>
-            </div>
-        <?php else: ?>
-            <div class="admin-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <p>No se encontró el usuario solicitado.</p>
-                <a href="leerusuarios.php" class="btn-admin secundario">← Volver a Lista de Usuarios</a>
-            </div>
-        <?php endif; ?>
-    </div>
+<?php
+include_once '../conexion.php';
 
-    <!-- Incluimos el pie de página -->
-    <?php include '../princip/footer.php'; ?>
-</body>
-</html>
+$sql = "select * from usuarios";
+$resultado = $conexion->query($sql);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>📦 Lista de usuarios</h1>
+

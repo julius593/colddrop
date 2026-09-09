@@ -74,8 +74,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <label for="Rol">Rol</label>
                     <select name="Rol" id="Rol">
                         <option value="cliente" selected>cliente</option>
-                        <option value="vendedor" selected>vendedor</option>
-                        <option value="Administrador" selected>Administrador</option>
                         <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrador'): ?>
                             <option value="vendedor">vendedor</option>
                             <option value="Administrador">Administrador</option>
@@ -96,8 +94,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
             </div>
         </form>
-
-        <!-- Botón para retornar al Panel Admin si la sesión lo amerita -->
+       <!-- Botón para retornar al Panel Admin si la sesión lo amerita -->
         <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrador'): ?>
             <a href="../princip/Administrador.php" class="links">← Volver al Panel Admin</a>
         <?php else: ?>

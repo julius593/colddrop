@@ -99,5 +99,7 @@ if (isset($_POST['confirmarEnvio'])) {
     </div>
 
     <?php include 'footer.php'; ?>
+
+   
 </body>
 </html>

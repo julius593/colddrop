@@ -4,15 +4,15 @@
 // ========================================================
 include_once '../conexion.php';
 
-if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
-    @session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'Administrador') {
     header('Location: ../princip/iniciosesion.php');
     exit();
 }
-
+            
 $sql = "SELECT * FROM usuarios";
 $resultado = $conexion->query($sql);
 ?>
@@ -111,3 +111,6 @@ $resultado = $conexion->query($sql);
 
 </body>
 </html>
+
+
+
