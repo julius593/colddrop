@@ -225,4 +225,4 @@ CREATE TABLE medioambiental (
     Comentario TEXT NOT NULL,
     Propuesta TEXT,
     Fecha DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+);
