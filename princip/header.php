@@ -54,6 +54,7 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
         <div>
             <a class="menu" href="../princip/consultar_pedido.php" style="color: #28a745; font-weight: 600;"><i class="fa-solid fa-truck-fast"></i> Ver Estado Pedido</a>
         </div>
+          
 
         <!-- Control de sesión -->
         <?php if (isset($_SESSION['usuario'])): ?>
