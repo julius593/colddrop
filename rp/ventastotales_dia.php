@@ -119,9 +119,9 @@ if ($resultado && $resultado->num_rows > 0) {
         var vendedores = <?php echo json_encode(array_keys($porVendedor)); ?>;
         var montosPorVendedor = <?php echo json_encode(array_values($porVendedor)); ?>;
 
-        // Gráfico de barras: monto por venta
+    
         new Chart(document.getElementById('graficoMontos'), {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: labelsVentas,
                 datasets: [{
