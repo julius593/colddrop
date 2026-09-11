@@ -49,52 +49,15 @@ $anoActual = date('Y');
 // ========================================================
 
 switch ($periodo) {
-
-    case 'dia':
-
-        $sql = "SELECT * FROM ventas
-                WHERE DATE(Fecha) = '$hoySql'
-                ORDER BY idVenta DESC";
-
-        $tituloPeriodo = "Ingresos del Día";
-
-        break;
-
-
-    case 'semana':
-
-        $sql = "SELECT * FROM ventas
-                WHERE DATE(Fecha) BETWEEN '$inicioSemana' AND '$finSemana'
-                ORDER BY idVenta DESC";
-
-        $tituloPeriodo = "Ingresos de la Semana";
-
-        break;
-
-
-    case 'ano':
-
-        $sql = "SELECT * FROM ventas
-                WHERE YEAR(Fecha) = '$anoActual'
-                ORDER BY idVenta DESC";
-
-        $tituloPeriodo = "Ingresos del Año";
-
-        break;
-
-
-    case 'mes':
-
-    default:
-
-        $sql = "SELECT * FROM ventas
-                WHERE MONTH(Fecha) = '$mesActual'
-                AND YEAR(Fecha) = '$anoActual'
-                ORDER BY idVenta DESC";
-
-        $tituloPeriodo = "Ingresos del Mes";
-
-        break;
+    case 'dia': $sql = "SELECT * FROM ventas WHERE DATE(Fecha) = '$hoySql' ORDER BY idVenta DESC"; $tituloPeriodo = "Ingresos del Día";
+     break;
+case 'semana': $sql = "SELECT * FROM ventas WHERE DATE(Fecha) BETWEEN '$inicioSemana' AND '$finSemana' ORDER BY idVenta DESC"; $tituloPeriodo = "Ingresos de la Semana";
+    break;
+case 'ano': $sql = "SELECT * FROM ventas WHERE YEAR(Fecha) = '$anoActual' ORDER BY idVenta DESC"; $tituloPeriodo = "Ingresos del Año";
+    break;
+case 'mes':
+default: $sql = "SELECT * FROM ventas WHERE MONTH(Fecha) = '$mesActual' AND YEAR(Fecha) = '$anoActual' ORDER BY idVenta DESC"; $tituloPeriodo = "Ingresos del Mes";
+    break;
 }
 
 
@@ -538,7 +501,7 @@ $jsonMontosVendedor = json_encode(array_values($ventasVendedor));
     </div>
 
 
-    
+
     <!-- ==================================================
          TOTAL
          ================================================== -->
