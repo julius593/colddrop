@@ -32,6 +32,13 @@ $hoySql = date('Y-m-d');
 // CONSULTAR VENTAS DEL DÍA
 // ========================================================
 
+$sql = "SELECT * 
+        FROM ventas 
+        WHERE Fecha LIKE '%$hoy%' 
+           OR Fecha LIKE '%$hoySql%' 
+        ORDER BY idVenta DESC";
+
+$resultado = $conn->query($sql);
 
 // ========================================================
 // VARIABLES PARA EL REPORTE
