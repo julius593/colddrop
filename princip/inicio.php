@@ -35,6 +35,7 @@
     </div>
     <div class="imagen-wrap">
       <img class="imagenmuestra" src="https://i.pinimg.com/736x/6c/16/3a/6c163abeb93331246e23e58026ddddc9.jpg" alt="Colección 2" loading="lazy">
+      <img src="" alt=""loading="lazy">
     </div>
   </div>
 </section>
