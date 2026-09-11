@@ -53,3 +53,20 @@ $resultado = $conn->query($sql);
         <a href="menu_reportes.php" style="display:inline-block; margin-bottom: 20px; color: #555;">← Volver al Menú de Reportes</a>
 
 
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Cliente / Contacto</th>
+                        <th>Total de Pedidos Realizados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($resultado && $resultado->num_rows > 0) {
+                        $pos = 1;
+                        while ($row = $resultado->fetch_assoc()) {
+                            echo "<tr>";
+                                echo "<td>#".$pos++."</td>";
+                                echo "<td>".htmlspecialchars($row['Cliente'])."</td>";
