@@ -4,7 +4,25 @@
 // ========================================================
 include_once '../conexion.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'vendedor')) {
+    header("Location: ../princip/iniciosesion.php");
+    exit();
+}
+
+$sql = "SELECT p.Codigo, p.Nombre, p.Tipo, p.Costo, p.Imagen, SUM(c.cantidad) AS TotalVendido
+        FROM carrito c
+        INNER JOIN productos p ON p.Codigo = c.PRODUCTOS_Codigo
+        GROUP BY p.Codigo, p.Nombre, p.Tipo, p.Costo, p.Imagen
+        ORDER BY TotalVendido DESC
+        LIMIT 1";
+
+$resultado = $conn->query($sql);
+$producto = $resultado ? $resultado->fetch_assoc() : null;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
