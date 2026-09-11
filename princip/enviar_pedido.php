@@ -22,30 +22,7 @@ $sqlItems = "SELECT c.*, p.Nombre, p.Costo
              WHERE c.PEDIDOS_idPEDIDOS = '$idPedido'";
 $resItems = $conn->query($sqlItems);
 
-// 2. Calcular monto total
-$sqlTotal = "SELECT sum(costoTotal) as total FROM Carrito WHERE PEDIDOS_idPEDIDOS = '$idPedido'";
-$resTotal = $conn->query($sqlTotal);
-$totalRow = $resTotal ? $resTotal->fetch_assoc() : null;
-$montoTotal = ($totalRow && $totalRow['total'] !== null) ? (float)$totalRow['total'] : 0;
 
-// Si el formulario fue enviado
-if (isset($_POST['confirmarEnvio'])) {
-    $nombreCliente = $_POST['nombreCliente'];
-    $celular = $_POST['celular'];
-    $direccion = $_POST['direccion'];
-    $notas = isset($_POST['notas']) ? $_POST['notas'] : '';
-
-    $nombreCompleto = $nombreCliente . " (Tel: " . $celular . " - Dir: " . $direccion . ")";
-
-    // Actualizamos el pedido con los datos del cliente y estado 'Pendiente'
-    $sqlUpdate = "UPDATE pedidos SET Nombre = '$nombreCompleto', Estado = 'Pendiente' WHERE idPEDIDOS = '$idPedido'";
-    $conn->query($sqlUpdate);
-
-    // Redirigimos a la vista de comprobante con código QR y WhatsApp
-    header("Location: detalle_pedido.php?idPedido=$idPedido&enviado=1&celular=" . urlencode($celular));
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
