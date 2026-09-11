@@ -120,17 +120,6 @@ if ($resultado && $resultado->num_rows > 0) {
         // INGRESOS POR VENDEDOR
         // ---------------------------------------------
 
-        $vendedor = !empty($row['NombreVendedor'])
-            ? $row['NombreVendedor']
-            : 'Sin vendedor';
-
-        if (!isset($ventasVendedor[$vendedor])) {
-            $ventasVendedor[$vendedor] = 0;
-        }
-
-        $ventasVendedor[$vendedor] += $monto;
-    }
-}
 
 
 // ========================================================
