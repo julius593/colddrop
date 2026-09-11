@@ -149,11 +149,28 @@ if ($total == null) {
     </div>
 
     <!-- Script de manipulación AJAX para eliminar ítems del Carrito -->
-    <script>
-    function eliminarAjax(codigo, idPedido) {
-        if (!confirm('¿Deseas eliminar esta prenda del carrito?')) return;
+<script>
+function eliminarAjax(codigo, idPedido) {
 
+    Swal.fire({
+        title: '¿Eliminar prenda?',
+        text: '¿Estás seguro de que quieres eliminar esta prenda?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6'
+    }).then((result) => {
+
+        // Si NO confirmó, no hacemos nada
+        if (!result.isConfirmed) {
+            return;
+        }
+
+        // Si confirmó, recién aquí hacemos el fetch
         const formData = new FormData();
+
         formData.append('Codigo', codigo);
         formData.append('idPedido', idPedido);
 
@@ -163,16 +180,45 @@ if ($total == null) {
         })
         .then(response => response.json())
         .then(data => {
+
             if (data.success) {
-                window.location.reload();
+
+                Swal.fire({
+                    title: '¡Eliminada!',
+                    text: 'La prenda ha sido eliminada correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    window.location.reload();
+                });
+
+            } else {
+
+                Swal.fire({
+                    title: 'Error',
+                    text: data.message || 'No se pudo eliminar la prenda.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+
             }
+
         })
         .catch(error => {
+
             console.error('Error:', error);
-            alert('Error al eliminar el producto');
+
+            Swal.fire({
+                title: 'Error',
+                text: 'Ocurrió un error al eliminar el producto.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+
         });
-    }
-    </script>
+    });
+}
+</script>
 
     <!-- Incluimos el pie de página -->
     <?php include 'footer.php'; ?>
