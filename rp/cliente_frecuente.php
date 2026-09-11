@@ -70,3 +70,19 @@ $resultado = $conn->query($sql);
                             echo "<tr>";
                                 echo "<td>#".$pos++."</td>";
                                 echo "<td>".htmlspecialchars($row['Cliente'])."</td>";
+                                echo "<td><strong>".$row['TotalPedidos']." pedidos</strong></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3' style='text-align:center;'>No se encontraron registros de clientes.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <?php include '../princip/footer.php'; ?>
+</body>
+</html>
