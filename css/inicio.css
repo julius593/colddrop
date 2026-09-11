@@ -172,24 +172,16 @@ footer{
   color: #fff;
   font-size: 60px;
 }   
-.imagen-wrap {
-  overflow: hidden;
-  opacity: 0;
-  animation: aparecer 0.8s ease forwards;
+.imagenmuestra {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  margin: 100px;
+  transition: all 1s ;
 }
-
-.imagen-wrap:nth-child(1) { animation-delay: 0.1s; }
-.imagen-wrap:nth-child(2) { animation-delay: 0.35s; }
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.imagenmuestra:hover {
+  transform: scale(1.1);
+  
 }
 #historia {
   display: grid;

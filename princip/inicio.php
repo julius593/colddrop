@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- ========================================================
      PÁGINA PRINCIPAL / DE INICIO (INICIO.PHP)
      ======================================================== -->
@@ -61,4 +62,6 @@
   <!-- Incluimos el pie de página de la web -->
   <?php include 'footer.php'; ?>
 </body>
+=======
+
 </html>
