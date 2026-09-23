@@ -138,6 +138,43 @@ if ($total == null) {
             <?php if ($resultadoCart && $resultadoCart->num_rows > 0): ?>
                 <a href="enviar_pedido.php?idPedido=<?php echo htmlspecialchars($id_PEDIDOS); ?>" class="btn-nuevo" style="background-color: #28a745; font-size:15px; font-weight:700;"><i class="fa-solid fa-paper-plane"></i> Enviar / Confirmar Pedido</a>
                 <a href="detalle_pedido.php?idPedido=<?php echo htmlspecialchars($id_PEDIDOS); ?>" class="btn-nuevo" style="background-color: #17a2b8;"><i class="fa-solid fa-file-pdf"></i> Ver Comprobante PDF</a>
+                <div class="botones-pedido">
+
+    <a href="registrar_venta.php?idPedido=<?php echo htmlspecialchars($id_PEDIDOS); ?>" 
+       class="btn-nuevo btn-venta">
+        🧾 Registrar Venta Oficial
+    </a>
+
+    <a href="nuevo_pedido.php" 
+       class="btn-nuevo btn-pedido">
+        Generar Nuevo Pedido
+    </a>
+
+</div>
+<?php
+$urlDetallePedido = "http://localhost/colddrop/princip/detalle_pedido.php?idPedido=" . $id_PEDIDOS;
+
+$urlQR = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="
+       . urlencode($urlDetallePedido);
+?>
+
+<div class="qr-carrito">
+
+    <h3>📱 Código QR del Pedido</h3>
+
+    <p>Escanea el código para consultar tu comprobante</p>
+
+    <img 
+        src="<?php echo htmlspecialchars($urlQR); ?>"
+        alt="Código QR del pedido"
+    >
+
+    <p>
+        <strong>Pedido #<?php echo htmlspecialchars($id_PEDIDOS); ?></strong>
+    </p>
+
+</div>
+
                 
                 <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] === 'Administrador' || $_SESSION['rol'] === 'vendedor')): ?>
                     <a href="registrar_venta.php?idPedido=<?php echo htmlspecialchars($id_PEDIDOS); ?>" class="btn-nuevo" style="background-color: #ffc107; color:#000;" onclick="return confirm('¿Confirmar la venta de este pedido? Esto descontará el stock de los productos.');"><i class="fa-solid fa-cash-register"></i> Registrar Venta Oficial</a>
