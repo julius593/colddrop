@@ -175,6 +175,34 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
             body { background: #fff; }
             .invoice-box { box-shadow: none; margin: 0; width: 100%; max-width: 100%; }
         }
+        .qr-pago {
+    text-align: center;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.qr-pago h2 {
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.qr-pago p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.imagen-qr-pago {
+    display: block;
+    width: 400px;
+    max-width: 90%;
+    height: auto;
+    margin: 20px auto;
+}
+
+.texto-pedido-qr {
+    font-weight: bold;
+    color: #222 !important;
+}
     </style>
 </head>
 <body>
@@ -285,7 +313,23 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
             </div>
         </div>
     </div>
+<div class="qr-pago">
 
+    <h2>Pago mediante QR</h2>
+
+    <p>Escanea el código QR para realizar el pago</p>
+
+    <img 
+        src="../imgenes/pago_qr.jpg" 
+        alt="Código QR de pago Banco Unión"
+        class="imagen-qr-pago"
+    >
+
+    <p class="texto-pedido-qr">
+        Pedido #<?php echo htmlspecialchars($idPedido); ?>
+    </p>
+
+</div>
     <!-- Botones de Impresión y PDF (Disponibles cuando esté APROBADO o sea Admin/Vendedor) -->
     <div class="no-print btn-action-group" style="max-width: 800px; margin: 0 auto 50px auto;">
         <a href="micarrito.php?idPedido=<?php echo htmlspecialchars($idPedido); ?>" class="btn-back">← Volver al Carrito</a>
@@ -316,7 +360,8 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
     <div class="no-print">
         <?php include 'footer.php'; ?>
     </div>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost/proyectoColdDrop/princip/detalle_pedido.php?idPedido=2" >
+    
+
 </body>
 </html>
 
