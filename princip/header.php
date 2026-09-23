@@ -30,7 +30,7 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
     <header>
         <!-- Logo de la marca -->
         <div>
-            <a href="../princip/inicio.php"><img id="logoh" src="../imagenes/Captura_de_pantalla_2026-04-23_121404-removebg-preview.png" alt="ColdDrop Logo"></a>
+            <a href="../princip/index.php"><img id="logoh" src="../imagenes/Captura_de_pantalla_2026-04-23_121404-removebg-preview.png" alt="ColdDrop Logo"></a>
         </div>
 
         <!-- Menú de categorías desplegable -->
