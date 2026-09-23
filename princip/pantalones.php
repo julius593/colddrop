@@ -103,11 +103,21 @@ $resultado = $conexion->query($sql);
         })
         .then(res => res.json())
         .then(data => {
-            if (data.success) {
-                alert('¡Producto añadido al carrito exitosamente!');
-            } else {
-                alert(data.message);
-            }
+          if (data.success) {
+    Swal.fire({
+        title: '¡Éxito!',
+        text: '¡Producto añadido al carrito exitosamente!',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    });
+} else {
+    Swal.fire({
+        title: 'Error',
+        text: data.message,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+    });
+}
         })
         .catch(err => {
             console.error(err);

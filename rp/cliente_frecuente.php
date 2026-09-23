@@ -16,6 +16,7 @@ if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'Administrador' && $_SESSIO
 $sql = "SELECT Nombre as Cliente, COUNT(*) as TotalPedidos FROM pedidos WHERE Nombre IS NOT NULL AND Nombre != '' GROUP BY Nombre ORDER BY TotalPedidos DESC LIMIT 10";
 $resultado = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

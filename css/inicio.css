@@ -96,10 +96,14 @@ header{
 #dos{
     grid-area: dos;
     }
-#imagenesmuestra{
+#imagenesmuestra {
+    width: 100%;
     display: flex;
     justify-content: center;
-    
+    align-items: center;
+    gap: 30px;
+    padding: 40px 20px;
+    box-sizing: border-box;
 }
 #tres{
     grid-area: tres;
@@ -172,16 +176,20 @@ footer{
   color: #fff;
   font-size: 60px;
 }   
+.imagen-wrap {
+    width: 45%;
+    overflow: hidden;
+    border-radius: 15px;
+}
 .imagenmuestra {
-  width: 600px;
-  height: 600px;
-  object-fit: cover;
-  margin: 100px;
-  transition: all 1s ;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
 }
 .imagenmuestra:hover {
-  transform: scale(1.1);
-  
+    transform: scale(1.05);
 }
 #historia {
   display: grid;

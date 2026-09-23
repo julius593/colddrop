@@ -189,4 +189,28 @@ button:hover, input[type="submit"]:hover {
     margin-bottom: 30px;
 }
 
+.botones-pedido {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto 30px;
+}
 
+.botones-pedido .btn-nuevo {
+    width: 350px;
+    text-align: center;
+}
+
+.qr-carrito {
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.qr-carrito img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+}
