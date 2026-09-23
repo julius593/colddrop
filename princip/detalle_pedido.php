@@ -59,6 +59,7 @@ $esAprobado = ($st === 'Entregado' || $st === 'Aprobado');
 // Mensaje y enlace para WhatsApp
 $msgWs = urlencode("¡Hola ColdDrop! Envíe el pedido #" . $idPedido . " por $" . number_format($montoTotal, 2) . ". Cliente: " . $pedido['Nombre']);
 $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
