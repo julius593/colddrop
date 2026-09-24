@@ -313,6 +313,7 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
             </div>
         </div>
     </div>
+<!-- QR DE PAGO -->
 <div class="qr-pago">
 
     <h2>Pago mediante QR</h2>
@@ -320,7 +321,7 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
     <p>Escanea el código QR para realizar el pago</p>
 
     <img 
-        src="../imgenes/pago_qr.jpg" 
+        src="../imagenes/pago_qr.jpg"
         alt="Código QR de pago Banco Unión"
         class="imagen-qr-pago"
     >
