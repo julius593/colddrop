@@ -437,106 +437,56 @@ document.addEventListener('DOMContentLoaded', function () {
     // ====================================================
 
     <?php if (count($filas) > 0): ?>
-
     const ctxMontos =
         document.getElementById('graficoMontos');
-
-
     new Chart(ctxMontos, {
-
         type: 'line',
-
         data: {
-
             labels: labelsVentas,
-
             datasets: [{
-
                 label: 'Monto de venta ($)',
-
                 data: montosVentas,
-
                 borderWidth: 3,
-
                 tension: 0.3,
-
                 fill: false,
-
                 pointRadius: 5,
-
                 pointHoverRadius: 7
-
             }]
-
         },
-
         options: {
-
             responsive: true,
-
             maintainAspectRatio: false,
-
             plugins: {
-
                 title: {
-
                     display: true,
-
                     text: 'Monto de cada venta realizada hoy',
-
                     font: {
-
                         size: 16
-
                     }
-
                 },
-
                 legend: {
-
                     display: true
-
                 },
-
                 tooltip: {
-
                     callbacks: {
-
                         label: function(context) {
-
-                            return ' $' +
+                            return ' $' 
                                 context.parsed.y.toFixed(2);
-
                         }
-
                     }
-
                 }
-
             },
-
             scales: {
-
                 y: {
-
                     beginAtZero: true,
-
                     title: {
-
                         display: true,
-
                         text: 'Monto ($)'
-
                     }
-
                 },
-
                 x: {
-
                     title: {
-
                         display: true,
-
                         text: 'Ventas'
 
                     }
@@ -556,66 +506,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const ctxVendedores =
         document.getElementById('graficoVendedores');
-
-
     new Chart(ctxVendedores, {
-
         type: 'doughnut',
-
         data: {
-
             labels: vendedores,
-
             datasets: [{
-
                 label: 'Recaudado ($)',
-
                 data: montosPorVendedor,
-
                 borderWidth: 2
-
             }]
-
         },
-
         options: {
-
             responsive: true,
-
             maintainAspectRatio: false,
-
             plugins: {
-
                 title: {
-
                     display: true,
-
                     text: 'Distribución de ventas por vendedor',
-
                     font: {
-
                         size: 16
-
                     }
-
                 },
-
                 legend: {
-
                     position: 'bottom'
-
                 },
-
                 tooltip: {
-
-                    callbacks: {
-
-                        label: function(context) {
-
-                            let valor =
-                                context.parsed;
-
-                            return ' ' +
+                    callbacks: { label: function(context) { let valor = context.parsed; return ' ' +
                                 context.label +
                                 ': $' +
                                 valor.toFixed(2);
