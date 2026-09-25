@@ -28,6 +28,32 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
 </head>
 <body>
     <header>
+        <div>
+  <!-- Ícono para ir atrás -->
+<img 
+  src="../imagenes/contorno-fino-de-punta-de-flecha-a-la-izquierda.png" 
+  alt="Atrás" 
+  onclick="window.history.back()"
+  style="width: 24px; height: 24px; cursor: pointer; vertical-align: middle; margin-right: 8px;" 
+/>
+
+<!-- Ícono para ir adelante -->
+<img 
+  src="../imagenes/flecha-correcta.png" 
+  alt="Adelante" 
+  onclick="window.history.forward()" 
+style="width: 24px; height: 24px; cursor: pointer; vertical-align: middle; margin-right: 8px;"
+  />
+<script>
+  function irAtras() {
+    window.history.back();
+  }
+
+  function irAdelante() {
+    window.history.forward();
+  }
+</script>
+        </div>
         <!-- Logo de la marca -->
         <div>
             <a href="../princip/index.php"><img id="logoh" src="../imagenes/Captura_de_pantalla_2026-04-23_121404-removebg-preview.png" alt="ColdDrop Logo"></a>
@@ -35,8 +61,8 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
 
         <!-- Menú de categorías desplegable -->
         <div>
-            <input class="menu" type="checkbox" id="menu-toggle">
-            <label class="menu" for="menu-toggle" id="menu-label">Menu ▾</label>
+            <input class="btn-historial" type="checkbox" id="menu-toggle">
+            <label class="btn-historial" for="menu-toggle" id="menu-label">Menu ▾</label>
             <nav class="dropdown">
                 <a href="../princip/hoodeis.php" class="menu">Hoodies</a>
                 <a href="../princip/poleras.php" class="menu">Poleras</a>
