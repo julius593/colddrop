@@ -14,7 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // ========================================================
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: medioambiental.php');
+    header('Location: actualizarusuarios.php');
     exit();
 }
 
@@ -50,7 +50,7 @@ if ($id === '' || !is_numeric($id)) {
             No se recibió un identificador válido.
         </p>
 
-        <a href='medioambiental.php'>
+        <a href='actualizarusuarios.php'>
             Volver
         </a>
     </div>
@@ -85,7 +85,7 @@ if (
             Completa todos los campos obligatorios.
         </p>
 
-        <a href='medioambiental.php'>
+        <a href='actualizarusuarios.php'>
             Volver
         </a>
 
@@ -100,14 +100,14 @@ if (
 // ACTUALIZAR INFORMACIÓN
 // ========================================================
 
-$sql = "UPDATE medioambiental
+$sql = "UPDATE actualizarusuarios
         SET Nombre = ?,
             Apellido = ?,
             Tipo = ?,
             Importancia = ?,
             Comentario = ?,
             Propuesta = ?
-        WHERE id_medioambiental = ?";
+        WHERE actualizarusuarios = ?";
 
 $stmt = $conn->prepare($sql);
 
@@ -161,10 +161,10 @@ if ($stmt->execute()) {
             <h2>✅ Información actualizada correctamente</h2>
 
             <p>
-                El formulario medioambiental fue actualizado exitosamente.
+                El formulario fue actualizado exitosamente.
             </p>
 
-            <a href='medioambiental.php'>
+            <a href='actualizarusuarios.php'>
                 Volver al formulario
             </a>
 
@@ -209,7 +209,7 @@ if ($stmt->execute()) {
         . htmlspecialchars($stmt->error)
         . "</p>
 
-        <a href='medioambiental.php'>
+        <a href='actualizarusuarios.php'>
             Volver
         </a>
 

@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<div style='text-align:center; margin-top:50px; font-family:sans-serif;'>";
         echo "<h2 style='color:#28a745;'>¡Formulario y sugerencia guardados correctamente!</h2>";
         echo "<p>Tu comentario ha sido registrado en el sistema.</p>";
-        echo "<a href='../princip/inicio.php' style='display:inline-block; margin-top:15px; padding:10px 20px; background:#111; color:#fff; text-decoration:none; border-radius:6px;'>Volver al Inicio</a>";
+        echo "<a href='../princip/index.php' style='display:inline-block; margin-top:15px; padding:10px 20px; background:#111; color:#fff; text-decoration:none; border-radius:6px;'>Volver al Inicio</a>";
         echo "</div>";
     } else {
         echo "Error al guardar en la base de datos: " . $conn->error;
