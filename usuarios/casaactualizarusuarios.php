@@ -24,20 +24,47 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $id = $_POST['id_medioambiental'] ?? '';
 
-$Nombre = trim($_POST['Nombre'] ?? '');
-$Apellido = trim($_POST['Apellido'] ?? '');
-$Tipo = trim($_POST['Tipo'] ?? '');
-$Importancia = trim($_POST['Importancia'] ?? '');
-$Comentario = trim($_POST['Comentario'] ?? '');
-$Propuesta = trim($_POST['Propuesta'] ?? '');
+$Nombre       = trim($_POST['Nombre'] ?? '');
+$Apellido     = trim($_POST['Apellido'] ?? '');
+$Tipo         = trim($_POST['Tipo'] ?? '');
+$Importancia  = trim($_POST['Importancia'] ?? '');
+$Comentario   = trim($_POST['Comentario'] ?? '');
+$Propuesta    = trim($_POST['Propuesta'] ?? '');
 
 
 // ========================================================
-// VALIDAR DATOS
+// VALIDAR ID
+// ========================================================
+
+if ($id === '' || !is_numeric($id)) {
+
+    echo "
+    <div style='
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+    '>
+        <h2>❌ ID inválido</h2>
+
+        <p>
+            No se recibió un identificador válido.
+        </p>
+
+        <a href='medioambiental.php'>
+            Volver
+        </a>
+    </div>
+    ";
+
+    exit();
+}
+
+
+// ========================================================
+// VALIDAR CAMPOS OBLIGATORIOS
 // ========================================================
 
 if (
-    $id === '' ||
     $Nombre === '' ||
     $Apellido === '' ||
     $Tipo === '' ||
@@ -102,6 +129,8 @@ if (!$stmt) {
 // ASIGNAR VALORES
 // ========================================================
 
+$id = (int)$id;
+
 $stmt->bind_param(
     "ssssssi",
     $Nombre,
@@ -120,25 +149,50 @@ $stmt->bind_param(
 
 if ($stmt->execute()) {
 
-    echo "
-    <div style='
-        font-family: Arial;
-        text-align: center;
-        margin-top: 50px;
-    '>
+    if ($stmt->affected_rows > 0) {
 
-        <h2>✅ Información actualizada correctamente</h2>
+        echo "
+        <div style='
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        '>
 
-        <p>
-            El formulario medioambiental fue actualizado exitosamente.
-        </p>
+            <h2>✅ Información actualizada correctamente</h2>
 
-        <a href='medioambiental.php'>
-            Volver al formulario
-        </a>
+            <p>
+                El formulario medioambiental fue actualizado exitosamente.
+            </p>
 
-    </div>
-    ";
+            <a href='medioambiental.php'>
+                Volver al formulario
+            </a>
+
+        </div>
+        ";
+
+    } else {
+
+        echo "
+        <div style='
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        '>
+
+            <h2>⚠️ Sin cambios</h2>
+
+            <p>
+                El registro existe, pero no se realizaron cambios.
+            </p>
+
+            <a href='medioambiental.php'>
+                Volver
+            </a>
+
+        </div>
+        ";
+    }
 
 } else {
 

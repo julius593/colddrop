@@ -52,7 +52,7 @@ if (!empty($CI)) {
             <div class="form-grid">
                 <div class="form-group">
                     <label for="CI">Carnet de Identidad (CI)</label>
-                    <input type="number" name="CI" id="CI" value="<?php echo htmlspecialchars($CI); ?>" readonly style="background-color:#f0f0f0;">
+                    <input type="number" name="CI" id="CI" value="<?php echo htmlspecialchars($CI); ?>"  style="background-color:#f0f0f0;">
                 </div>
 
                 <div class="form-group">
