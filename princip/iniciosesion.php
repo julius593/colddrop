@@ -25,7 +25,7 @@
             <label for="Contrasena">Contraseña</label>
             <input type="password" name="Contrasena" id="Contrasena" required placeholder="Tu contraseña"> 
 
-            <input type="submit" value="Ingresar">
+            <input type="submit" value="Ingresar" >
         </form>
 
         <!-- Botones de navegación adicional -->

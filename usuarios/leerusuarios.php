@@ -88,9 +88,9 @@ $resultado = $conexion->query($sql);
                                     if ($estado === 'Bloqueado') {
                                         echo "<a href='bloquear_usuario.php?CI=$CI' class='btn-action btn-mostrar' style='background-color:#28a745;'>Desbloquear</a>";
                                     } else {
-                                        echo "<a href='bloquear_usuario.php?CI=$CI' class='btn-action btn-eliminar' style='background-color:#fd7e14;'>Bloquear</a>";
+                                        echo "<a href='bloquear_usuario.php?CI=$CI' class='btn-action btn-eliminar' style='background-color:#fd7e14;'>Bloquear</a>";  
                                     }
-                                    echo "<a href='elimusuarios.php?CI=$CI' class='btn-action btn-eliminar' onclick='return confirm(\"¿Estás seguro de eliminar este usuario?\");'>Eliminar</a>";
+                                    echo "<a href='elimusuarios.php?CI=$CI' class='btn-action btn-eliminar btn-eliminar-usuario' data-ci='$CI'>Eliminar</a>";
                                     echo "<a href='casaleerusuarios.php?CI=$CI' class='btn-action btn-mostrar'>Detalles</a>";
                                 echo "</td>";
                             echo "</tr>";
@@ -108,7 +108,52 @@ $resultado = $conexion->query($sql);
 
     <!-- Incluimos el pie de página -->
     <?php include '../princip/footer.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+
+document.querySelectorAll('.btn-eliminar-usuario').forEach(function(boton) {
+
+    boton.addEventListener('click', function(event) {
+
+        event.preventDefault();
+
+        const url = this.href;
+        const ci = this.dataset.ci;
+
+        Swal.fire({
+
+            title: '¿Eliminar usuario?',
+
+            text: 'El usuario con CI ' + ci + ' será eliminado.',
+
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#d33',
+
+            cancelButtonColor: '#6c757d',
+
+            confirmButtonText: 'Sí, eliminar',
+
+            cancelButtonText: 'Cancelar'
+
+        }).then((resultado) => {
+
+            if (resultado.isConfirmed) {
+
+                window.location.href = url;
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 </body>
 </html>
 

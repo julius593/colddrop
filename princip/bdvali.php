@@ -46,7 +46,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
         header("Location: Administrador.php");
     } else {
         // Si no es vendedor ni admin, lo llevamos a la página de inicio
-        header("Location: inicio.php");
+        header("Location: index.php");
     }
 } else {
     // Si no coincide, avisamos al usuario
