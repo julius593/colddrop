@@ -58,12 +58,16 @@ header {
 }
 
 /* Enlaces de menú */
-.menu {
+.menu,
+#menu-label {
+    display: inline-block;
     transition: all 0.4s;  
     color: black;    
     text-decoration: none;
+    cursor: pointer;
 }
-.menu:hover {
+.menu:hover,
+#menu-label:hover {
     background-color: #111;
     color: #fff;
     padding: 10px;
@@ -72,6 +76,7 @@ header {
 #menu-toggle {
     display: none;
 }
+
 
 /* Logo principal */
 #logoh {
