@@ -17,11 +17,16 @@ header {
 
 /* Menú desplegable para categorías */
 .dropdown {
-    display: none;
+    display: block;
     position: absolute;
     background-color: #f8f8f8;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s linear 0.4s;
 }
 .dropdown a {
     display: block;
@@ -33,7 +38,11 @@ header {
     background-color: #ddd;
 }
 #menu-toggle:checked + #menu-label + .dropdown {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
 }
 
 /* Botón e ícono del carrito */
@@ -67,7 +76,8 @@ header {
     cursor: pointer;
 }
 .menu:hover,
-#menu-label:hover {
+#menu-label:hover,
+#menu-toggle:checked + #menu-label {
     background-color: #111;
     color: #fff;
     padding: 10px;
