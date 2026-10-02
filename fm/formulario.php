@@ -46,7 +46,7 @@ if (session_status() === PHP_SESSION_NONE) {
           method="POST"
           id="formMedioambiental">
 
-        <h2>FORMULARIO MEDIOAMBIENTAL</h2>
+        <h2>SUGERENCIAS Y FICHA AMBIENTAL</h2>
 
 
         <div class="form-grid">
@@ -125,11 +125,12 @@ if (session_status() === PHP_SESSION_NONE) {
         ← Volver al Inicio
 
     </a>
-
+<a href="" class="links">FICHA MEDIOMABIENTAL</a>
 </div>
 
 
 <?php include '../princip/footer.php'; ?>
+
 
 </body>
 
