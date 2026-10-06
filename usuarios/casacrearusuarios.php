@@ -11,70 +11,37 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 // ========================================================
-// VERIFICAR QUE SE RECIBIÓ EL FORMULARIO
-// ========================================================
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
-    header('Location: crearusuarios.php');
-    exit();
-
-}
-
-
-// ========================================================
 // RECIBIR DATOS
 // ========================================================
 
-$CI = isset($_POST['CI']) ? trim($_POST['CI']) : '';
-$Nombre = isset($_POST['Nombre']) ? trim($_POST['Nombre']) : '';
-$Apellido = isset($_POST['Apellido']) ? trim($_POST['Apellido']) : '';
-$Usuario = isset($_POST['Usuario']) ? trim($_POST['Usuario']) : '';
-$Contrasena = isset($_POST['Contrasena']) ? trim($_POST['Contrasena']) : '';
-$Direccion = isset($_POST['Direccion']) ? trim($_POST['Direccion']) : '';
-$Celular = isset($_POST['Celular']) ? trim($_POST['Celular']) : '';
+$CI = trim($_POST['CI'] ?? '');
+$Nombre = trim($_POST['Nombre'] ?? '');
+$Apellido = trim($_POST['Apellido'] ?? '');
+$Usuario = trim($_POST['Usuario'] ?? '');
+$Contrasena = trim($_POST['Contrasena'] ?? '');
+$Direccion = trim($_POST['Direccion'] ?? '');
+$Celular = trim($_POST['Celular'] ?? '');
 
 
 // ========================================================
 // DETERMINAR ROL Y ESTADO
 // ========================================================
 
-$esAdministrador = false;
-
-if (
+$esAdministrador =
     isset($_SESSION['rol']) &&
-    $_SESSION['rol'] === 'Administrador'
-) {
+    $_SESSION['rol'] === 'Administrador';
 
-    $esAdministrador = true;
+$Rol = $esAdministrador
+    ? ($_POST['Rol'] ?? '')
+    : 'cliente';
 
-}
-
-
-if ($esAdministrador) {
-
-    if (isset($_POST['Rol'])) {
-        $Rol = trim($_POST['Rol']);
-    } else {
-        $Rol = 'cliente';
-    }
-
-    if (isset($_POST['Estado'])) {
-        $Estado = trim($_POST['Estado']);
-    } else {
-        $Estado = 'Activo';
-    }
-
-} else {
-
-    $Rol = 'cliente';
-    $Estado = 'Activo';
-
-}
+$Estado = $esAdministrador
+    ? ($_POST['Estado'] ?? '')
+    : 'Activo';
 
 
 // ========================================================
-// VALIDAR CAMPOS OBLIGATORIOS
+// VALIDAR CAMPOS
 // ========================================================
 
 if (
@@ -94,169 +61,72 @@ if (
 } else {
 
     // ====================================================
-    // COMPROBAR SI EL CI YA EXISTE
+    // INSERTAR USUARIO
     // ====================================================
 
-    $sqlCI = "SELECT CI FROM usuarios WHERE CI = ?";
+    $sql = "INSERT INTO usuarios
+            (
+                CI,
+                Nombre,
+                Apellido,
+                Usuario,
+                Contrasena,
+                Direccion,
+                Celular,
+                Rol,
+                Estado
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmtCI = $conn->prepare($sqlCI);
+    $stmt = $conn->prepare($sql);
 
-    if (!$stmtCI) {
+
+    if (!$stmt) {
 
         $exito = false;
 
-        $mensaje = 'Error al preparar la consulta: ' . $conn->error;
+        $mensaje =
+            'Error al preparar la consulta: ' .
+            $conn->error;
 
     } else {
 
-        $stmtCI->bind_param("s", $CI);
+        $stmt->bind_param(
+            'sssssssss',
+            $CI,
+            $Nombre,
+            $Apellido,
+            $Usuario,
+            $Contrasena,
+            $Direccion,
+            $Celular,
+            $Rol,
+            $Estado
+        );
 
-        $stmtCI->execute();
 
-        $stmtCI->store_result();
+        // ================================================
+        // EJECUTAR
+        // ================================================
 
+        if ($stmt->execute()) {
 
-        if ($stmtCI->num_rows > 0) {
+            $exito = true;
 
-            $exito = false;
-
-            $mensaje = 'El CI ' . $CI . ' ya está registrado.';
-
-            $stmtCI->close();
+            $mensaje = 'El usuario fue registrado correctamente.';
 
         } else {
 
-            $stmtCI->close();
+            $exito = false;
 
-
-            // ====================================================
-            // COMPROBAR SI EL USUARIO YA EXISTE
-            // ====================================================
-
-            $sqlUsuario = "SELECT Usuario FROM usuarios WHERE Usuario = ?";
-
-            $stmtUsuario = $conn->prepare($sqlUsuario);
-
-
-            if (!$stmtUsuario) {
-
-                $exito = false;
-
-                $mensaje =
-                    'Error al preparar la consulta: ' .
-                    $conn->error;
-
-            } else {
-
-                $stmtUsuario->bind_param("s", $Usuario);
-
-                $stmtUsuario->execute();
-
-                $stmtUsuario->store_result();
-
-
-                if ($stmtUsuario->num_rows > 0) {
-
-                    $exito = false;
-
-                    $mensaje =
-                        'El nombre de usuario "' .
-                        $Usuario .
-                        '" ya está registrado.';
-
-                    $stmtUsuario->close();
-
-                } else {
-
-                    $stmtUsuario->close();
-
-
-                    // ====================================================
-                    // INSERTAR USUARIO
-                    // ====================================================
-
-                    $sql = "INSERT INTO usuarios
-                    (
-                        CI,
-                        Nombre,
-                        Apellido,
-                        Usuario,
-                        Contrasena,
-                        Direccion,
-                        Celular,
-                        Rol,
-                        Estado
-                    )
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-
-                    $stmt = $conn->prepare($sql);
-
-
-                    if (!$stmt) {
-
-                        $exito = false;
-
-                        $mensaje =
-                            'Error al preparar la consulta: ' .
-                            $conn->error;
-
-                    } else {
-
-                        $stmt->bind_param(
-                            "sssssssss",
-                            $CI,
-                            $Nombre,
-                            $Apellido,
-                            $Usuario,
-                            $Contrasena,
-                            $Direccion,
-                            $Celular,
-                            $Rol,
-                            $Estado
-                        );
-
-
-                        // ====================================================
-                        // EJECUTAR INSERT
-                        // ====================================================
-
-                        if ($stmt->execute()) {
-
-                            $exito = true;
-
-                            $mensaje =
-                                'El usuario fue registrado correctamente.';
-
-                        } else {
-
-                            $exito = false;
-
-                            $mensaje =
-                                'Error al registrar el usuario: ' .
-                                $stmt->error;
-
-                        }
-
-
-                        $stmt->close();
-
-                    }
-
-                }
-
-            }
-
+            $mensaje =
+                'Error al registrar el usuario: ' .
+                $stmt->error;
         }
 
+        $stmt->close();
     }
-
 }
-
-
-// ========================================================
-// CERRAR CONEXIÓN
-// ========================================================
 
 $conn->close();
 
@@ -275,13 +145,9 @@ $conn->close();
     >
 
     <title>
-        <?php
-        if ($exito) {
-            echo 'Usuario creado';
-        } else {
-            echo 'Error al registrar';
-        }
-        ?>
+        <?php echo $exito
+            ? 'Usuario creado'
+            : 'Error al registrar'; ?>
         - ColdDrop
     </title>
 
@@ -318,6 +184,10 @@ $conn->close();
 
     <style>
 
+        /* ==================================================
+           GENERAL
+        ================================================== */
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -349,6 +219,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           CONTENEDOR PRINCIPAL
+        ================================================== */
+
         .resultado-container {
 
             width: 100%;
@@ -371,6 +245,10 @@ $conn->close();
 
         }
 
+
+        /* ==================================================
+           ICONO DE ÉXITO
+        ================================================== */
 
         .icono-exito {
 
@@ -404,6 +282,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           ICONO ERROR
+        ================================================== */
+
         .icono-error {
 
             width: 110px;
@@ -429,6 +311,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           TITULOS
+        ================================================== */
+
         h1 {
 
             color: #176b4d;
@@ -449,6 +335,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           TEXTO
+        ================================================== */
+
         .mensaje {
 
             color: #667085;
@@ -461,6 +351,10 @@ $conn->close();
 
         }
 
+
+        /* ==================================================
+           DATOS DEL USUARIO
+        ================================================== */
 
         .usuario-creado {
 
@@ -495,6 +389,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           SEPARADOR
+        ================================================== */
+
         .separador {
 
             width: 100%;
@@ -507,6 +405,10 @@ $conn->close();
 
         }
 
+
+        /* ==================================================
+           BOTONES
+        ================================================== */
 
         .botones {
 
@@ -546,6 +448,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           BOTÓN INICIAR SESIÓN
+        ================================================== */
+
         .btn-login {
 
             background: #20b26b;
@@ -568,6 +474,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           BOTÓN USUARIOS
+        ================================================== */
+
         .btn-usuarios {
 
             background: #f1f5f9;
@@ -586,6 +496,10 @@ $conn->close();
         }
 
 
+        /* ==================================================
+           BOTÓN ERROR
+        ================================================== */
+
         .btn-error {
 
             background: #dc3545;
@@ -601,6 +515,10 @@ $conn->close();
 
         }
 
+
+        /* ==================================================
+           ANIMACIONES
+        ================================================== */
 
         @keyframes aparecer {
 
@@ -643,6 +561,10 @@ $conn->close();
 
         }
 
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
 
         @media (max-width: 600px) {
 
@@ -691,200 +613,197 @@ $conn->close();
 <div class="resultado-container">
 
 
-<?php if ($exito): ?>
+    <?php if ($exito): ?>
 
 
-    <!-- =================================================
-         REGISTRO EXITOSO
-    ================================================== -->
+        <!-- =================================================
+             REGISTRO EXITOSO
+        ================================================== -->
 
-    <div class="icono-exito">
+        <div class="icono-exito">
 
-        <i class="fa-solid fa-check"></i>
+            <i class="fa-solid fa-check"></i>
 
-    </div>
-
-
-    <h1>
-        ¡Usuario creado exitosamente!
-    </h1>
+        </div>
 
 
-    <p class="mensaje">
-
-        El usuario fue registrado correctamente
-        en el sistema <strong>ColdDrop</strong>.
-
-    </p>
+        <h1>
+            ¡Usuario creado exitosamente!
+        </h1>
 
 
-    <!-- =================================================
-         INFORMACIÓN DEL USUARIO
-    ================================================== -->
+        <p class="mensaje">
 
-    <div class="usuario-creado">
-
-        <p>
-
-            <strong>
-                <i class="fa-solid fa-id-card"></i>
-                CI:
-            </strong>
-
-            <?php echo htmlspecialchars($CI); ?>
+            El usuario fue registrado correctamente
+            en el sistema <strong>ColdDrop</strong>.
 
         </p>
 
 
-        <p>
+        <!-- =================================================
+             INFORMACIÓN DEL USUARIO
+        ================================================== -->
 
-            <strong>
-                <i class="fa-solid fa-user"></i>
-                Nombre:
-            </strong>
+        <div class="usuario-creado">
+
+            <p>
+                <strong>
+                    <i class="fa-solid fa-id-card"></i>
+                    CI:
+                </strong>
+
+                <?php echo htmlspecialchars($CI); ?>
+
+            </p>
+
+
+            <p>
+                <strong>
+                    <i class="fa-solid fa-user"></i>
+                    Nombre:
+                </strong>
+
+                <?php
+                echo htmlspecialchars(
+                    $Nombre . ' ' . $Apellido
+                );
+                ?>
+
+            </p>
+
+
+            <p>
+                <strong>
+                    <i class="fa-solid fa-at"></i>
+                    Usuario:
+                </strong>
+
+                <?php echo htmlspecialchars($Usuario); ?>
+
+            </p>
+
+
+            <p>
+                <strong>
+                    <i class="fa-solid fa-user-tag"></i>
+                    Rol:
+                </strong>
+
+                <?php echo htmlspecialchars($Rol); ?>
+
+            </p>
+
+
+            <p>
+                <strong>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Estado:
+                </strong>
+
+                <?php echo htmlspecialchars($Estado); ?>
+
+            </p>
+
+        </div>
+
+
+        <p class="mensaje">
+
+            Ahora puedes utilizar las credenciales
+            registradas para iniciar sesión.
+
+        </p>
+
+
+        <div class="separador"></div>
+
+
+        <!-- =================================================
+             BOTONES
+        ================================================== -->
+
+        <div class="botones">
+
+
+            <a
+                href="../princip/iniciosesion.php"
+                class="btn btn-login"
+            >
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Iniciar Sesión
+
+            </a>
+
+
+            <a
+                href="leerusuarios.php"
+                class="btn btn-usuarios"
+            >
+
+                <i class="fa-solid fa-users"></i>
+
+                Ver Usuarios
+
+            </a>
+
+
+        </div>
+
+
+    <?php else: ?>
+
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
+
+        <div class="icono-error">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </div>
+
+
+        <h1 class="titulo-error">
+
+            No se pudo registrar
+
+        </h1>
+
+
+        <p class="mensaje">
 
             <?php
-            echo htmlspecialchars(
-                $Nombre . ' ' . $Apellido
-            );
+            echo htmlspecialchars($mensaje);
             ?>
 
         </p>
 
 
-        <p>
-
-            <strong>
-                <i class="fa-solid fa-at"></i>
-                Usuario:
-            </strong>
-
-            <?php echo htmlspecialchars($Usuario); ?>
-
-        </p>
+        <div class="separador"></div>
 
 
-        <p>
-
-            <strong>
-                <i class="fa-solid fa-user-tag"></i>
-                Rol:
-            </strong>
-
-            <?php echo htmlspecialchars($Rol); ?>
-
-        </p>
+        <div class="botones">
 
 
-        <p>
+            <a
+                href="crearusuarios.php"
+                class="btn btn-error"
+            >
 
-            <strong>
-                <i class="fa-solid fa-circle-check"></i>
-                Estado:
-            </strong>
+                <i class="fa-solid fa-arrow-left"></i>
 
-            <?php echo htmlspecialchars($Estado); ?>
+                Volver al formulario
 
-        </p>
-
-    </div>
+            </a>
 
 
-    <p class="mensaje">
-
-        Ahora puedes utilizar las credenciales
-        registradas para iniciar sesión.
-
-    </p>
+        </div>
 
 
-    <div class="separador"></div>
-
-
-    <!-- =================================================
-         BOTONES
-    ================================================== -->
-
-    <div class="botones">
-
-
-        <a
-            href="../princip/iniciosesion.php"
-            class="btn btn-login"
-        >
-
-            <i class="fa-solid fa-right-to-bracket"></i>
-
-            Iniciar Sesión
-
-        </a>
-
-
-        <a
-            href="leerusuarios.php"
-            class="btn btn-usuarios"
-        >
-
-            <i class="fa-solid fa-users"></i>
-
-            Ver Usuarios
-
-        </a>
-
-
-    </div>
-
-
-<?php else: ?>
-
-
-    <!-- =================================================
-         ERROR
-    ================================================== -->
-
-    <div class="icono-error">
-
-        <i class="fa-solid fa-xmark"></i>
-
-    </div>
-
-
-    <h1 class="titulo-error">
-
-        No se pudo registrar
-
-    </h1>
-
-
-    <p class="mensaje">
-
-        <?php
-        echo htmlspecialchars($mensaje);
-        ?>
-
-    </p>
-
-
-    <div class="separador"></div>
-
-
-    <div class="botones">
-
-        <a
-            href="crearusuarios.php"
-            class="btn btn-error"
-        >
-
-            <i class="fa-solid fa-arrow-left"></i>
-
-            Volver al formulario
-
-        </a>
-
-    </div>
-
-
-<?php endif; ?>
+    <?php endif; ?>
 
 
 </div>
@@ -893,3 +812,4 @@ $conn->close();
 </body>
 
 </html>
+
