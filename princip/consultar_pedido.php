@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
+$busqueda = isset($_GET['busqueda']) ? $conn->real_escape_string(trim($_GET['busqueda'])) : '';
 $pedido = null;
 
 if (!empty($busqueda)) {
