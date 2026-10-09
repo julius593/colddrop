@@ -78,7 +78,7 @@ if (
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexion->prepare($sql);
 
 
     if (!$stmt) {
@@ -87,7 +87,7 @@ if (
 
         $mensaje =
             'Error al preparar la consulta: ' .
-            $conn->error;
+            $conexion->error;
 
     } else {
 
@@ -128,7 +128,7 @@ if (
     }
 }
 
-$conn->close();
+$conexion->close();
 
 ?>
 
