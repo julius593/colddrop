@@ -39,7 +39,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     } else if ($_SESSION['rol'] == "Administrador") {
         header("Location: Administrador.php");
     } else {
-        header("Location: inicio.php");
+        header("Location: index.php");
     }
 } else {
     echo "<div style='text-align:center; margin-top:50px; font-family:sans-serif; background:#fff; padding:40px; border-radius:12px; max-width:450px; margin:50px auto; box-shadow:0 4px 15px rgba(0,0,0,0.1);'>";

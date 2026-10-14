@@ -59,12 +59,24 @@ if (
                 Estado
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+<<<<<<< HEAD
     $stmt = $conn->prepare($sql);
+=======
+
+    $stmt = $conexion->prepare($sql);
+
+
+>>>>>>> 84b3e83826ec353b6dd5b04066fc991ddab6970c
     if (!$stmt) {
         $exito = false;
         $mensaje =
             'Error al preparar la consulta: ' .
+<<<<<<< HEAD
             $conn->error;
+=======
+            $conexion->error;
+
+>>>>>>> 84b3e83826ec353b6dd5b04066fc991ddab6970c
     } else {
         $stmt->bind_param(
             'sssssssss',
@@ -93,7 +105,13 @@ if (
         $stmt->close();
     }
 }
+<<<<<<< HEAD
 $conexion->close();
+=======
+
+$conexion->close();
+
+>>>>>>> 84b3e83826ec353b6dd5b04066fc991ddab6970c
 ?>
 <!DOCTYPE html>
 <html lang="es">
