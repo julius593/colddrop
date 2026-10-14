@@ -345,7 +345,6 @@ $conexion->close();
             </a>
         </div>
     <?php endif; ?>
-
 </div>
 </body>
 </html>
