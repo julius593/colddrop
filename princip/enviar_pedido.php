@@ -1,6 +1,6 @@
 <?php
 // ========================================================
-// ENVIAR / CONFIRMAR PEDIDO DEL CLIENTE (ENVIAR_PEDIDO.PHP)
+// ENVIAR / CONFIRMAR PEDIDO DEL CLIENTE CON PROTOCOLOS DE SEGURIDAD (ENVIAR_PEDIDO.PHP)
 // ========================================================
 include_once '../conexion.php';
 
@@ -8,7 +8,8 @@ if (!headers_sent() && session_status() === PHP_SESSION_NONE) {
     @session_start();
 }
 
-$idPedido = isset($_GET['idPedido']) ? $_GET['idPedido'] : '';
+// Protocolo Seguridad Inyección SQL: real_escape_string en idPedido
+$idPedido = isset($_GET['idPedido']) ? $conn->real_escape_string(trim($_GET['idPedido'])) : '';
 
 if (empty($idPedido)) {
     header("Location: micarrito.php");
@@ -30,10 +31,11 @@ $montoTotal = ($totalRow && $totalRow['total'] !== null) ? (float)$totalRow['tot
 
 // Si el formulario fue enviado
 if (isset($_POST['confirmarEnvio'])) {
-    $nombreCliente = $_POST['nombreCliente'];
-    $celular = $_POST['celular'];
-    $direccion = $_POST['direccion'];
-    $notas = isset($_POST['notas']) ? $_POST['notas'] : '';
+    // Protocolo Seguridad Inyección SQL & XSS: real_escape_string & strip_tags
+    $nombreCliente = isset($_POST['nombreCliente']) ? $conn->real_escape_string(strip_tags(trim($_POST['nombreCliente']))) : '';
+    $celular = isset($_POST['celular']) ? $conn->real_escape_string(strip_tags(trim($_POST['celular']))) : '';
+    $direccion = isset($_POST['direccion']) ? $conn->real_escape_string(strip_tags(trim($_POST['direccion']))) : '';
+    $notas = isset($_POST['notas']) ? $conn->real_escape_string(strip_tags(trim($_POST['notas']))) : '';
 
     $nombreCompleto = $nombreCliente . " (Tel: " . $celular . " - Dir: " . $direccion . ")";
 
@@ -41,7 +43,6 @@ if (isset($_POST['confirmarEnvio'])) {
     $sqlUpdate = "UPDATE pedidos SET Nombre = '$nombreCompleto', Estado = 'Pendiente' WHERE idPEDIDOS = '$idPedido'";
     $conn->query($sqlUpdate);
 
-    // Redirigimos a la vista de comprobante con código QR y WhatsApp
     header("Location: detalle_pedido.php?idPedido=$idPedido&enviado=1&celular=" . urlencode($celular));
     exit();
 }
@@ -99,7 +100,5 @@ if (isset($_POST['confirmarEnvio'])) {
     </div>
 
     <?php include 'footer.php'; ?>
-
-   
 </body>
 </html>
