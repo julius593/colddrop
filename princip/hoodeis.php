@@ -83,6 +83,10 @@ $resultado = $conexion->query($sql);
             }
             ?>
         </div>
+            <div class="carrito">
+            <a href="../princip/micarrito.php" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </a>
     </section>
 
     <section style="text-align: center; margin: 40px 0;">
@@ -127,9 +131,5 @@ $resultado = $conexion->query($sql);
     </script>
 
     <?php include 'footer.php'; ?>    
-    <div class="carrito">
-            <a href="../princip/micarrito.php" class="btn-carrito">
-                <i class="fa-solid fa-cart-shopping"></i> Carrito
-            </a>
 </body>
 </html>
