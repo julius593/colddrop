@@ -83,6 +83,11 @@ $resultado = $conexion->query($sql);
             }
             ?>
         </div>
+         </div>
+            <div class="carrito">
+            <a href="../princip/micarrito.php" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </a>
     </section>
 
     <section style="text-align: center; margin: 40px 0;">
