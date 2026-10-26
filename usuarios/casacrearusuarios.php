@@ -55,8 +55,6 @@ if (
     // ====================================================
     // INSERTAR USUARIO
     // ====================================================
-    $hash = password_hash($Contrasena, PASSWORD_DEFAULT);
-
     $sql = "INSERT INTO usuarios
             (CI, Nombre, Apellido, Usuario, Contrasena, Direccion, Celular, Rol, Estado)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -74,7 +72,7 @@ if (
                 $Nombre,
                 $Apellido,
                 $Usuario,
-                $hash,
+                $Contrasena,
                 $Direccion,
                 $Celular,
                 $Rol,

@@ -1,6 +1,6 @@
 <?php
 // ========================================================
-// VALIDACIÓN DE USUARIO Y CONTRASEÑA EN LA BASE DE DATOS
+// VALIDACIÓN DE USUARIO Y CONTRASEÑA - COLDDROP
 // ========================================================
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -9,43 +9,104 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once '../conexion.php';
 
-// Protocolo Seguridad Inyección SQL: Sanitizar entradas $_POST con real_escape_string
-$usuario = isset($_POST['Usuario']) ? $conexion->real_escape_string(trim($_POST['Usuario'])) : '';
-$contrasena = isset($_POST['Contrasena']) ? $conexion->real_escape_string(trim($_POST['Contrasena'])) : '';
-
-$sql = "SELECT * FROM usuarios WHERE Usuario='$usuario' AND Contrasena='$contrasena'";
-$resultado = mysqli_query($conexion, $sql);
-
-if ($resultado && mysqli_num_rows($resultado) > 0) {
-    $fila = mysqli_fetch_assoc($resultado);
-
-    if (isset($fila['Estado']) && ($fila['Estado'] === 'Bloqueado' || $fila['Estado'] === 'Inactivo')) {
-        echo "<div style='text-align:center; margin-top:50px; font-family:sans-serif; background:#fff; padding:40px; border-radius:12px; max-width:450px; margin:50px auto; box-shadow:0 4px 15px rgba(0,0,0,0.1);'>";
-        echo "<h2 style='color:#dc3545;'>Acceso Denegado</h2>";
-        // Protocolo XSS: htmlspecialchars al mostrar texto dinámico
-        echo "<p style='color:#555;'>Tu cuenta se encuentra actualmente <strong>".htmlspecialchars($fila['Estado'])."</strong>. Contacta al Administrador del sistema.</p>";
-        echo "<a href='iniciosesion.php' style='display:inline-block; margin-top:15px; padding:10px 20px; background:#111; color:#fff; text-decoration:none; border-radius:6px;'>Volver a Intentar</a>";
-        echo "</div>";
-        exit();
+// --------------------------------------------------------
+// Muestra una tarjeta de mensaje y termina el script
+// --------------------------------------------------------
+function mostrarMensaje(string $titulo, string $texto = ''): void
+{
+    echo "<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'>";
+    echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+    echo "<title>Iniciar Sesión - ColdDrop</title></head><body style='background:#f5f5f5; margin:0;'>";
+    echo "<div style='text-align:center; font-family:sans-serif; background:#fff; padding:40px; border-radius:12px; max-width:450px; margin:50px auto; box-shadow:0 4px 15px rgba(0,0,0,0.1);'>";
+    echo "<h2 style='color:#dc3545;'>" . htmlspecialchars($titulo) . "</h2>";
+    if ($texto !== '') {
+        echo "<p style='color:#555;'>" . $texto . "</p>";   // $texto ya viene escapado por quien llama
     }
-
-    $_SESSION['id'] = $fila['CI'];
-    $_SESSION['usuario'] = $fila['Nombre'];
-    $_SESSION['dir'] = $fila['Direccion'];
-    $_SESSION['rol'] = $fila['Rol'];
-    
-    if ($_SESSION['rol'] == "vendedor") {
-        header("Location: vendedor.php");
-    } else if ($_SESSION['rol'] == "Administrador") {
-        header("Location: Administrador.php");
-    } else {
-
-        header("Location: index.php");
-    }
-} else {
-    echo "<div style='text-align:center; margin-top:50px; font-family:sans-serif; background:#fff; padding:40px; border-radius:12px; max-width:450px; margin:50px auto; box-shadow:0 4px 15px rgba(0,0,0,0.1);'>";
-    echo "<h2 style='color:#dc3545;'>Usuario o contraseña incorrectos</h2>";
     echo "<a href='iniciosesion.php' style='display:inline-block; margin-top:15px; padding:10px 20px; background:#111; color:#fff; text-decoration:none; border-radius:6px;'>Volver a intentar</a>";
-    echo "</div>";
+    echo "</div></body></html>";
+    exit();
 }
-?>
+
+// --------------------------------------------------------
+// Solo se acepta el envío del formulario por POST
+// --------------------------------------------------------
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: iniciosesion.php");
+    exit();
+}
+
+// --------------------------------------------------------
+// Recibir datos (la contraseña NO lleva trim, igual que en el registro)
+// --------------------------------------------------------
+$usuario    = trim($_POST['Usuario'] ?? '');
+$contrasena = $_POST['Contrasena'] ?? '';
+
+if ($usuario === '' || $contrasena === '') {
+    mostrarMensaje('Completa usuario y contraseña');
+}
+
+// --------------------------------------------------------
+// Buscar al usuario con consulta preparada (anti inyección SQL)
+// --------------------------------------------------------
+try {
+    $stmt = $conexion->prepare(
+        "SELECT CI, Nombre, Direccion, Rol, Estado
+         FROM usuarios
+         WHERE Usuario = ? AND Contrasena = ?
+         LIMIT 1"
+    );
+    $stmt->bind_param('ss', $usuario, $contrasena);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $fila      = $resultado->fetch_assoc();
+    $stmt->close();
+} catch (mysqli_sql_exception $e) {
+    error_log('Error en login: ' . $e->getMessage());
+    mostrarMensaje('Error interno', 'No se pudo validar tu acceso. Inténtalo más tarde.');
+}
+
+$conexion->close();
+
+// --------------------------------------------------------
+// Credenciales incorrectas
+// --------------------------------------------------------
+if (!$fila) {
+    mostrarMensaje('Usuario o contraseña incorrectos');
+}
+
+// --------------------------------------------------------
+// Cuenta bloqueada o inactiva
+// --------------------------------------------------------
+if (in_array($fila['Estado'], ['Bloqueado', 'Inactivo'], true)) {
+    mostrarMensaje(
+        'Acceso Denegado',
+        'Tu cuenta se encuentra actualmente <strong>' . htmlspecialchars($fila['Estado']) .
+        '</strong>. Contacta al Administrador del sistema.'
+    );
+}
+
+// --------------------------------------------------------
+// Iniciar sesión (se renueva el ID para evitar robo de sesión)
+// --------------------------------------------------------
+session_regenerate_id(true);
+
+$_SESSION['id']      = $fila['CI'];
+$_SESSION['usuario'] = $fila['Nombre'];
+$_SESSION['dir']     = $fila['Direccion'];
+$_SESSION['rol']     = $fila['Rol'];
+
+// --------------------------------------------------------
+// Redirigir según el rol
+// --------------------------------------------------------
+switch ($fila['Rol']) {
+    case 'vendedor':
+        header("Location: vendedor.php");
+        break;
+    case 'Administrador':
+        header("Location: Administrador.php");
+        break;
+    default:
+        header("Location: index.php");
+        break;
+}
+exit();
