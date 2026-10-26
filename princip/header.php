@@ -84,9 +84,6 @@ style="width: 24px; height: 24px; cursor: pointer; vertical-align: middle; margi
 
         <!-- Control de sesión -->
         <?php if (isset($_SESSION['usuario'])): ?>
-            <div>
-                <span class="menu" style="color: #666; cursor: default;">Hola, <?php echo htmlspecialchars($_SESSION['usuario']); ?></span>
-            </div>
             <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrador'): ?>
                 <div>
                     <a class="menu" href="../princip/Administrador.php"><i class="fa-solid fa-user-gear"></i> Panel Admin</a>
