@@ -101,7 +101,7 @@
             <p>
                 Creemos que sentirse Cold es sentirse bien.
             </p>
-            <a href="poleras.php" class="btn">
+            <a href="hoodeis.php" class="btn">
                 Compra ahora -&gt;
             </a>
         </div>

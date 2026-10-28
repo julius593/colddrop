@@ -345,17 +345,36 @@ $urlWs = "https://api.whatsapp.com/send?text=" . $msgWs;
     </div>
 
     <script>
-    function descargarPDF() {
-        const element = document.getElementById('documentToPdf');
-        const opt = {
-            margin:       0.5,
-            filename:     'Pedido_ColdDrop_#<?php echo $idPedido; ?>.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-        html2pdf().set(opt).from(element).save();
-    }
+function descargarPDF() {
+    window.scrollTo(0, 0); // importante: capturar desde arriba
+
+    const element = document.getElementById('documentToPdf');
+    const opt = {
+        margin:   0.5,
+        filename: 'Pedido_ColdDrop_<?php echo $idPedido; ?>.pdf',
+        image:    { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: document.documentElement.scrollWidth,
+            onclone: function (doc) {
+                const el = doc.getElementById('documentToPdf');
+                el.style.margin = '0';
+                el.style.boxShadow = 'none';
+                el.style.borderRadius = '0';
+                el.style.maxWidth = '100%';
+                doc.querySelectorAll('.no-print').forEach(n => n.style.display = 'none');
+            }
+        },
+        jsPDF:    { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    html2pdf().set(opt).from(element).save();
+}
     </script>
 
     <div class="no-print">

@@ -125,7 +125,9 @@ if (session_status() === PHP_SESSION_NONE) {
         ← Volver al Inicio
 
     </a>
-
+<a href="https://docs.google.com/document/d/1iKnuWvo2iAcYh6GG7oe4jR8cWnqLNovOer30xyK3dXw/edit?tab=t.0" class="links">
+    FAM
+</a>
 </div>
 
 

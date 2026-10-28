@@ -25,6 +25,8 @@
             <li style="list-style: none;"><a class="listafooter" href="hoodeis.php">Hoodies</a></li>
             <li style="list-style: none;"><a class="listafooter" href="poleras.php">Poleras</a></li>
             <li style="list-style: none;"><a class="listafooter" href="pantalones.php">Pantalones</a></li>
+            <li style="list-style: none;"><a class="listafooter" href="shorts.php">Shorts</a></li>
+
         </div>
 
         <!-- Sección 3: Contacto -->
